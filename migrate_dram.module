@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains migrate_dram.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function migrate_dram_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the migration_nwr module.
+    case 'help.page.migrate_dram':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Migration from MYSQL tables to Drupal core entities') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function migrate_dram() {
+  return [
+    'migrate_dram' => [
+      'render element' => 'children',
+    ],
+  ];
+}
