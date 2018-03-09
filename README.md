@@ -1,8 +1,7 @@
 # migrate-dram
 Custom Drupal migrations from SQL database to Drupal entities
 
-### A few handy commands for troubleshooting migrations
-
+#### A few handy commands for troubleshooting migrations
 When re-enabling a migration module, you may encounter the following error:
 <pre>
 Drupal\Core\Config\PreExistingConfigException: Configuration objects (migrate_plus.migration.people) provided[error]
