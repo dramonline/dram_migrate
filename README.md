@@ -1,4 +1,4 @@
-# migrate-dram
+# migrate_dram
 Custom Drupal migrations from SQL database to Drupal entities.
 
 ## Handling active configurations
