@@ -11,7 +11,7 @@ The following Drupal console command removes migration from active configuration
 
 ## Adding an uninstall script to custom migrate modules
 
-<code>
+<pre>
 <?php
 /**
  * @file
@@ -31,4 +31,4 @@ function example_migrate_uninstall() {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
   }
 }
-</code>
+</pre>
