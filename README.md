@@ -11,24 +11,4 @@ The following Drupal console command removes migration from active configuration
 
 ## Adding an uninstall script to custom migrate modules
 
-`
-<?php
-/**
- * @file
- * Example migration install file.
- */
-/**
- * Implements hook_uninstall().
- */
-function example_migrate_uninstall() {
-  // Delete this module's migrations.
-  $migrations = [
-    'example_people',
-    'example_places',
-    'example_things'
-  ];
-  foreach ($migrations as $migration) {
-    Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
-  }
-}
-`
+<script src="https://gist.github.com/jasloe/9293b50bad43b8d9605b30404df34e44.js"></script>
