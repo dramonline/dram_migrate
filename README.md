@@ -11,4 +11,4 @@ The following Drupal console command removes migration from active configuration
 
 ## Adding an uninstall script to custom migrate modules
 
-<script src="https://gist.github.com/jasloe/9293b50bad43b8d9605b30404df34e44.js"></script>
+https://gist.github.com/jasloe/9293b50bad43b8d9605b30404df34e44
