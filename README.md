@@ -1,6 +1,22 @@
 # migrate_dram
 Custom Drupal migrations from SQL database to Drupal entities.
 
+## Major DRAM data types
+* album
+* artist
+* function
+* identifier (contains UPC, ISRC, and vendor codes)
+* instrument
+* label
+* tag
+* track
+* work
+
+### DRAM data types are joined by
+* artist_item
+* label_item
+* tag_item
+
 ## Handling active configurations
 When re-enabling a migration module, you may encounter the following error:
 <pre>
