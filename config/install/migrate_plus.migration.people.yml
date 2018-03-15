@@ -1,6 +1,6 @@
 # Migration metadata
-id: labels
-label: labels
+id: people
+label: people
 
 # Source plugin, id defined in the @MigrateSource annotation
 # in the src/Plugin/migrate/source/Company.php file.
@@ -19,12 +19,12 @@ process:
     default_value: people
 
   # One-to-one field mapping using the default "get" process plugin.
-  title: composer_id
+  #title: composer_id
   # We can also use body/summary, body/format
   # see core/modules/text/config/schema/text.schema.yml
   # field.value.text_with_summary, used by the node entity for the body field.
-  field_fname: first_name
-  field_lname: last_name
+  title: name
+  people_dram_id: id
 
 # Nothing needed here, it is a single table without any other relation.
 migration_dependencies: {}

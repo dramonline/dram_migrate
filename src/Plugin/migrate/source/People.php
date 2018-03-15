@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\migration_nwrPlugin\migrate\source\People
+ * Contains Drupal\migrate_dram\Plugin\migrate\source\People
  */
 
-namespace Drupal\migration_nwr\Plugin\migrate\source;
+namespace Drupal\migrate_dram\Plugin\migrate\source;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
@@ -23,11 +23,10 @@ class People extends SqlBase {
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('composers', 'c')
-      ->fields('c', [
-          'composer_id',
-          'first_name',
-          'last_name'
+    $query = $this->select('artist', 'a')
+      ->fields('a', [
+          'id',
+          'name'
         ]);
     return $query;
   }
@@ -37,9 +36,8 @@ class People extends SqlBase {
    */
   public function fields() {
     $fields = [
-      'composer_id' => $this->t('composer_id' ),
-      'first_name'   => $this->t('people_name_first' ),
-      'last_name'    => $this->t('people_name_last')
+      'id' => $this->t('people_dram_id' ),
+      'name'   => $this->t('title' )
     ];
     return $fields;
   }
@@ -49,9 +47,9 @@ class People extends SqlBase {
    */
   public function getIds() {
     return [
-      'composer_id' => [
+      'id' => [
         'type' => 'integer',
-        'alias' => 'p',
+        'alias' => 'a',
       ],
     ];
   }

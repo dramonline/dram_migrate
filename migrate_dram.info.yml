@@ -1,5 +1,4 @@
-name: 'Migration NWR'
+name: 'Migrate DRAM'
 type: module
 description: 'Migration from MYSQL tables to Drupal core entities'
 core: 8.x
-package: 'Migrations'
