@@ -7,7 +7,10 @@ When re-enabling a migration module, you may encounter the following error:
 Drupal\Core\Config\PreExistingConfigException: Configuration objects (migrate_plus.migration.people) provided[error]
 by migration_dram already exist in active configuration in /var/www/drupal/web/core/lib/Drupal/Core/Config/PreExistingConfigException.php:65</pre>
 The following Drupal console command removes migration from active configuration
-<pre>drupal config:delete active migrate_plus.migration.[migration-name]</pre>
+<pre>drupal config:delete active migrate_plus.migration.people
+drupal config:delete active migrate_plus.migration.instrument
+...
+</pre>
 
 ## Adding an uninstall script to custom migrate modules
 
