@@ -33,3 +33,14 @@ function migrate_dram() {
     ],
   ];
 }
+
+function migrate_dram_uninstall() {
+  // Delete this module's migrations.
+  $migrations = [
+    'migrate_dram_people',
+    'migrate_dram_instrument'
+  ];
+  foreach ($migrations as $migration) {
+    Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
+  }
+}
