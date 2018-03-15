@@ -25,7 +25,7 @@ process:
   # see core/modules/text/config/schema/text.schema.yml
   # field.value.text_with_summary, used by the node entity for the body field.
   title: name
-  people_dram_id: id
+  field_people_dram_id: id
 
 # Nothing needed here, it is a single table without any other relation.
 migration_dependencies: {}
