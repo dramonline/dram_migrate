@@ -1,0 +1,23 @@
+# Migration metadata
+id: person
+label: person
+description: Migration from MYSQL tables to Drupal core entities
+
+source:
+  plugin: person
+  key: migrate
+
+# Destination plugin
+destination:
+  plugin: entity:node
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: person
+
+  title: name
+  field_person_legacy_identifier: id
+
+migration_dependencies: {}

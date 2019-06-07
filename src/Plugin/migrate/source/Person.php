@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\migrate_dram\Plugin\migrate\source\People
+ * Contains Drupal\migrate_dram\Plugin\migrate\source\Person
  */
 
 namespace Drupal\migrate_dram\Plugin\migrate\source;
@@ -14,10 +14,10 @@ use Drupal\migrate\Row;
  * Minimalistic example for a SqlBase source plugin.
  *
  * @MigrateSource(
- *   id = "people"
+ *   id = "person"
  * )
  */
-class People extends SqlBase {
+class Person extends SqlBase {
 
   /**
    * {@inheritdoc}
@@ -36,7 +36,7 @@ class People extends SqlBase {
    */
   public function fields() {
     $fields = [
-      'id' => $this->t('people_dram_id' ),
+      'id' => $this->t('person_dram_id' ),
       'name'   => $this->t('title' )
     ];
     return $fields;
