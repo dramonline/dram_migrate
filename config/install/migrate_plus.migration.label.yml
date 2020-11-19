@@ -1,7 +1,7 @@
 # Migration metadata
 id: label
 label: label
-description: Migration from MYSQL tables to Drupal core entities 
+description: Migration from MYSQL tables to Drupal core entities
 
 source:
   plugin: label
@@ -14,7 +14,7 @@ process:
     plugin: default_value
     default_value: label
   title: name
-  field_label_dram_id: id
-  field_label_dram_legacy_id: legacy_id
+  field_dram_id: id
+  field_legacy_id: legacy_id
 
 migration_dependencies: {}

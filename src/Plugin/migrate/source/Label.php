@@ -38,8 +38,8 @@ class Label extends SqlBase {
    */
   public function fields() {
     $fields = [
-      'id' => $this->t('label_dram_id'),
-      'legacy_id' => $this->t('label_legacy_id' ),
+      'id' => $this->t('dram_id'),
+      'legacy_id' => $this->t('legacy_id' ),
       'name' => $this->t('title' ),
       'description' => $this->t('body')
     ];
