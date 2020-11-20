@@ -14,7 +14,13 @@ process:
     plugin: default_value
     default_value: label
   title: name
+  body: description
+  'field_label_link/uri': home_page_url
+  'field_label_link/title': name
   field_dram_id: id
   field_legacy_id: legacy_id
+  uid:
+    - plugin: default_value
+      default_value: 2
 
 migration_dependencies: {}

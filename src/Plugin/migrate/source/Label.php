@@ -28,7 +28,8 @@ class Label extends SqlBase {
           'id',
           'legacy_id',
           'name',
-          'description'
+          'description',
+          'home_page_url'
         ]);
     return $query;
   }
@@ -41,7 +42,8 @@ class Label extends SqlBase {
       'id' => $this->t('dram_id'),
       'legacy_id' => $this->t('legacy_id' ),
       'name' => $this->t('title' ),
-      'description' => $this->t('body')
+      'description' => $this->t('body'),
+      'home_page_url' => $this-t('home_page_url')
     ];
     return $fields;
   }

@@ -12,7 +12,6 @@ use Drupal\Core\Routing\RouteMatchInterface;
  */
 function migrate_dram_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
-    // Main module help for the migration_nwr module.
     case 'help.page.migrate_dram':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
@@ -34,11 +33,16 @@ function migrate_dram() {
   ];
 }
 
+/**
+ * Implements hook_uninstall().
+ *
+ * Removes stale migration configs during uninstall.
+ */
 function migrate_dram_uninstall() {
-  // Delete this module's migrations.
   $migrations = [
-    'migrate_dram_people',
-    'migrate_dram_instrument'
+    'instrument',
+    'label',
+    'person'
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
