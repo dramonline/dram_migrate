@@ -1,7 +1,7 @@
 # Migration metadata
 id: instrument
 label: instrument
-description: Migration from MYSQL tables to Drupal core entities 
+description: Migration from MYSQL tables to Drupal core entities
 
 # Source plugin, id defined in the @MigrateSource annotation
 # in the src/Plugin/migrate/source/Company.php file.
@@ -18,9 +18,6 @@ process:
     plugin: default_value
     default_value: instrument
   name: name
-  field_instrument_id: id
-  field_instrument_legacy_id: legacy_id
-  field_instrument_category: category
 
 # Nothing needed here, it is a single table without any other relation.
 migration_dependencies: {}
