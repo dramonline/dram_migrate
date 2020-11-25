@@ -22,27 +22,25 @@ class Instrument extends SqlBase {
   /**
    * {@inheritdoc}
    */
-  public function query() {
-    $query = $this->select('instrument', 'i')
-      ->fields('i', [
-          'id',
-          'legacy_id',
-          'name',
-          'category'
-        ]);
-    return $query;
-  }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function fields() {
+  public function query() {
+     $fields = ['id, legacy_id, name, category'];
+     return $this->select ('instrument', 'i')
+       ->fields('i', $fields)
+       ->orderBy('category');
+   }
+
+   /**
+    * (@inheritdoc)
+    */
+  public function fields(){
     $fields = [
-      'id' => $this->t('field_instrument_id'),
-      'name'   => $this->t('name'),
-      'category' => $this->t('field_instrument_category'),
-      'legacy_id' => $this->t('field_instrument_legacy_id')
+      'id' => $this->t('DRAM identifier'),
+      'legacy_id' => $this->t('Legacy identifier'),
+      'name' => $this->t('Instrument name'),
+      'category' => $this->('Instrument category'),
     ];
+
     return $fields;
   }
 
