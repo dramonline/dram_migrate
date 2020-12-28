@@ -18,6 +18,6 @@ process:
     default_value: person
 
   title: name
-  field_person_legacy_identifier: id
+  field_legacy_id: id
 
 migration_dependencies: {}

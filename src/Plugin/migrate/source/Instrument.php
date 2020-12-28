@@ -26,8 +26,7 @@ class Instrument extends SqlBase {
   public function query() {
      $fields = ['id, legacy_id, name, category'];
      return $this->select ('instrument', 'i')
-       ->fields('i', $fields)
-       ->orderBy('category');
+       ->fields('i', $fields);
    }
 
    /**
@@ -37,8 +36,7 @@ class Instrument extends SqlBase {
     $fields = [
       'id' => $this->t('DRAM identifier'),
       'legacy_id' => $this->t('Legacy identifier'),
-      'name' => $this->t('Instrument name'),
-      'category' => $this->('Instrument category'),
+      'name' => $this->t('Instrument name')
     ];
 
     return $fields;

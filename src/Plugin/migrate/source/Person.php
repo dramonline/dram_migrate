@@ -26,6 +26,7 @@ class Person extends SqlBase {
     $query = $this->select('artist', 'a')
       ->fields('a', [
           'id',
+          'legacy_id',
           'name'
         ]);
     return $query;
@@ -37,6 +38,7 @@ class Person extends SqlBase {
   public function fields() {
     $fields = [
       'id' => $this->t('person_dram_id' ),
+      'legacy_id' => $this->t('legacy_id' ),
       'name'   => $this->t('title' )
     ];
     return $fields;
