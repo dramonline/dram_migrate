@@ -24,9 +24,13 @@ class Instrument extends SqlBase {
    */
 
   public function query() {
-     $fields = ['id, legacy_id, name, category'];
-     return $this->select ('instrument', 'i')
-       ->fields('i', $fields);
+    $query = $this->select('instrument', 'i')
+        ->fields('i', [
+            'id',
+            'name',
+            'category']
+        );
+        return $query;
    }
 
    /**
@@ -35,8 +39,8 @@ class Instrument extends SqlBase {
   public function fields(){
     $fields = [
       'id' => $this->t('DRAM identifier'),
-      'legacy_id' => $this->t('Legacy identifier'),
-      'name' => $this->t('Instrument name')
+      'name' => $this->t('Instrument name'),
+      'category' => $this->t('Category')
     ];
 
     return $fields;

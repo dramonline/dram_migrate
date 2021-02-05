@@ -2,6 +2,7 @@
 id: instrument
 label: instrument
 description: Migration from MYSQL tables to Drupal core entities
+track_changes: true
 
 # Source plugin, id defined in the @MigrateSource annotation
 # in the src/Plugin/migrate/source/Company.php file.
@@ -16,8 +17,9 @@ destination:
 process:
   vid:
     plugin: default_value
-    default_value: instrument
+    default_value: instruments
   name: name
+  field_dram_id/value: id
 
 # Nothing needed here, it is a single table without any other relation.
 migration_dependencies: {}
