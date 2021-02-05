@@ -5,6 +5,7 @@ description: Migration from MYSQL tables to Drupal core entities
 
 source:
   plugin: label
+  track_changes: true
 
 destination:
   plugin: entity:node
@@ -14,12 +15,12 @@ process:
     plugin: default_value
     default_value: label
   title: name
-  'field_label_description/value': description
-  'field_label_description/format':
+  "field_label_description/value": description
+  "field_label_description/format":
     - plugin: default_value
       default_value: full_html
-  'field_label_link/uri': home_page_url
-  'field_label_link/title': name
+  "field_label_link/uri": home_page_url
+  "field_label_link/title": name
   field_dram_id: id
   field_legacy_id: legacy_id
   uid:

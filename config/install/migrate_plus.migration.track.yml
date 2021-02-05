@@ -1,0 +1,26 @@
+# Migration metadata
+id: track
+label: track
+description: Migration from MYSQL tables to Drupal core entities
+
+source:
+  plugin: track
+  track_changes: true
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: track
+  uid:
+    plugin: default_value
+    default_value: 1
+  title: title
+  field_dram_id: id
+  field_track_subtitle: display_subtitle
+
+# Destination plugin
+destination:
+  plugin: entity:node
+
+migration_dependencies: {}

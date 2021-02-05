@@ -14,20 +14,22 @@ use Drupal\migrate\Row;
  * Minimalistic example for a SqlBase source plugin.
  *
  * @MigrateSource(
- *   id = "track"
+ *   id = "album"
  * )
  */
-class Track extends SqlBase {
+class Album extends SqlBase {
 
   /**
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('track', 't')
-      ->fields('t', [
+    $query = $this->select('album', 'a')
+      ->fields('a', [
           'id',
+          'active',
           'title',
-          'display_subtitle'
+          'display_subtitle',
+          'label_id'
         ]);
       return $query;
   }
@@ -38,8 +40,10 @@ class Track extends SqlBase {
   public function fields() {
     $fields = [
       'id' => $this->t('DRAM identifier' ),
-      'title' => $this->t('Track title'),
-      'display_subtitle' => $this->t('Track subtitle')
+      'active' => $this->t('Is active' ),
+      'title' => $this->t('Album title'),
+      'display_subtitle' => $this->t('Album subtitle'),
+      'label_id' => $this->t('Label identifier'),
     ];
     return $fields;
   }
@@ -51,7 +55,7 @@ class Track extends SqlBase {
     return [
       'id' => [
         'type' => 'integer',
-        'alias' => 't',
+        'alias' => 'a',
       ],
     ];
   }

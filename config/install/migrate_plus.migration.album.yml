@@ -1,0 +1,31 @@
+# Migration metadata
+id: album
+label: album
+description: Migration from MYSQL tables to Drupal core entities
+
+source:
+  plugin: album
+  track_changes: true
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: release
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_dram_id: id
+  field_active: active
+  title: title
+  field_release_subtitle: display_subtitle
+  field_release_label:
+    - plugin: migration_lookup
+      migration: label
+      source: label_id
+
+# Destination plugin
+destination:
+  plugin: entity:node
+
+migration_dependencies: {}

@@ -40,9 +40,13 @@ function migrate_dram() {
  */
 function migrate_dram_uninstall() {
   $migrations = [
+    'album',
+    'category',
     'instrument',
     'label',
-    'person'
+    'person',
+    'track',
+    'work'
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();

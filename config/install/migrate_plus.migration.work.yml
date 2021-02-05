@@ -1,0 +1,46 @@
+# Migration metadata
+id: work
+label: work
+description: Migration from MYSQL tables to Drupal core entities
+
+source:
+  plugin: work
+  track_changes: true
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: work
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_dram_id: id
+  title: title
+  field_work_subtitle: display_subtitle
+  field_work_date_range_comp/value:
+    plugin: format_date
+    from_format: "Y-m-d"
+    to_format: "Y-m-d"
+    source: composition_start
+  field_work_date_range_comp/end_value:
+    plugin: format_date
+    from_format: "Y-m-d"
+    to_format: "Y-m-d"
+    source: composition_end
+  field_work_date_range_record/value:
+    plugin: format_date
+    from_format: "Y-m-d"
+    to_format: "Y-m-d"
+    source: recording_start
+  field_work_date_range_record/end_value:
+    plugin: format_date
+    from_format: "Y-m-d"
+    to_format: "Y-m-d"
+    source: recording_end
+
+# Destination plugin
+destination:
+  plugin: entity:node
+
+migration_dependencies: {}
