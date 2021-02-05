@@ -1,6 +1,7 @@
 # Migration metadata
 id: instrument
 label: instrument
+migration_group: instrument_hierarchy
 description: Migration from MYSQL tables to Drupal core entities
 track_changes: true
 
@@ -20,6 +21,14 @@ process:
     default_value: instruments
   name: name
   field_dram_id/value: id
+  parent:
+    -
+      plugin: migration_lookup
+      migration: instrument
+      source: category
+    -
+      plugin: default_value
+      default_value: 0
 
 # Nothing needed here, it is a single table without any other relation.
 migration_dependencies: {}
