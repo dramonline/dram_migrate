@@ -1,48 +1,49 @@
 # Migration metadata
-id: label
-label: label
+id: release
+label: release
 description: Migration from MYSQL tables to Drupal core entities
-migration_group: nodes
 
 source:
-  plugin: label
+  plugin: release
   track_changes: true
   constants:
-    NWR_URL: 'http://dramonline.org/labels'
+    NWR_URL: 'http://dramonline.org/albums'
   ids:
     id:
       type: integer
 
+# Destination plugin
 destination:
   plugin: entity:node
 
+# Process plugin
 process:
   type:
     plugin: default_value
-    default_value: corporate_entity
+    default_value: release
   uid:
-    -
-      plugin: default_value
-      default_value: 3
-  title: name
+   -
+    plugin: default_value
+    default_value: 3
+  title: title
+  field_subtitle: display_subtitle
   field_dram_id: id
   field_legacy_id: legacy_id
-  "body/value": description
-  "body/format":
-    - plugin: default_value
-      default_value: full_html
-  field_corporate_entity_org_type:
+  field_active: active
+  field_streaming_approved: field_streaming_approved
+  field_deprecated: field_deprecated
+  field_digital: digital
+  field_release_recording_label:
     -
-      plugin: default_value
-      default_value: 1
+      plugin: migration_lookup
+      migration: label
+      source: label_id
   pseudo_link:
     plugin: concat
     source:
       - constants/NWR_URL
       - url_code
     delimiter: '/'
-  "field_external_link/uri": home_page_url
-  "field_external_link/title": name
   "field_legacy_url/uri": '@pseudo_link'
   "field_legacy_url/title": url_code
 

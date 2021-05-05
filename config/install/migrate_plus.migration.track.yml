@@ -17,7 +17,7 @@ process:
     default_value: 1
   title: title
   field_dram_id: id
-  field_track_subtitle: display_subtitle
+  track_subtitle: display_subtitle
 
 # Destination plugin
 destination:

@@ -1,14 +1,8 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\migrate_dram\Plugin\migrate\source\Label
- */
-
-namespace Drupal\migrate_dram\Plugin\migrate\source;
+namespace Drupal\dram_migrate\Plugin\migrate\source;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
-use Drupal\migrate\Row;
 
 /**
  * Minimalistic example for a SqlBase source plugin.
@@ -25,12 +19,13 @@ class Label extends SqlBase {
   public function query() {
     $query = $this->select('label', 'l')
       ->fields('l', [
-          'id',
-          'legacy_id',
-          'name',
-          'description',
-          'home_page_url'
-        ]);
+        'id',
+        'legacy_id',
+        'name',
+        'description',
+        'home_page_url',
+        'url_code',
+      ]);
     return $query;
   }
 
@@ -40,10 +35,11 @@ class Label extends SqlBase {
   public function fields() {
     $fields = [
       'id' => $this->t('dram_id'),
-      'legacy_id' => $this->t('legacy_id' ),
-      'name' => $this->t('title' ),
+      'legacy_id' => $this->t('legacy_id'),
+      'name' => $this->t('title'),
       'description' => $this->t('description'),
-      'home_page_url' => $this-t('home_page_url')
+      'home_page_url' => $this->t('home_page_url'),
+      'url_code' => $this->t('url_code'),
     ];
     return $fields;
   }
@@ -59,4 +55,5 @@ class Label extends SqlBase {
       ],
     ];
   }
+
 }

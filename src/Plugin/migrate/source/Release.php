@@ -8,36 +8,27 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
  * Minimalistic example for a SqlBase source plugin.
  *
  * @MigrateSource(
- *   id = "track"
+ *   id = "release"
  * )
  */
-class Track extends SqlBase {
+class release extends SqlBase {
 
   /**
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('track', 't')
-      ->fields('t', [
+    $query = $this->select('album', 'a')
+      ->fields('a', [
         'id',
         'legacy_id',
-        'label_id',
-        'album_id',
-        'work_id',
-        'track_number',
+        'url_code',
+        'active',
         'title',
         'display_subtitle',
-        'runtime',
-        'composition_start',
-        'composition_end',
-        'composition_circa',
-        'recording_start',
-        'recording_end',
-        'recording_circa',
+        'label_id',
         'streaming_approved',
         'deprecated',
-        'disc_track_number',
-        'disc_number',
+        'digital',
       ]);
     return $query;
   }
@@ -48,9 +39,15 @@ class Track extends SqlBase {
   public function fields() {
     $fields = [
       'id' => $this->t('DRAM identifier'),
-      'legacy_id' => $this - t('Legacy identifier'),
-      'title' => $this->t('Track title'),
-      'display_subtitle' => $this->t('Track subtitle'),
+      'legacy_id' => $this->t('Legacy identifier'),
+      'active' => $this->t('Is active'),
+      'title' => $this->t('release title'),
+      'display_subtitle' => $this->t('release subtitle'),
+      'label_id' => $this->t('Label identifier'),
+      'url_code' => $this->t('url_code'),
+      'streaming_approved' => $this->t('streaming_approved'),
+      'deprecated' => $this->t('deprecated'),
+      'digital' => $this->t('digital'),
     ];
     return $fields;
   }
@@ -62,7 +59,7 @@ class Track extends SqlBase {
     return [
       'id' => [
         'type' => 'integer',
-        'alias' => 't',
+        'alias' => 'a',
       ],
     ];
   }

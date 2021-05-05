@@ -1,5 +1,5 @@
 {
-  "name": "drupal/migrate_dram",
+  "name": "drupal/dram-migrate",
   "type": "drupal-module",
   "description": "Migration from MYSQL tables to Drupal core entities",
   "keywords": ["Drupal"],
@@ -7,8 +7,8 @@
   "homepage": "https://www.dramonline.org",
   "minimum-stability": "dev",
   "support": {
-    "issues": "https://www.github.com/dramonline/migrate_dram",
-    "source": "https://www.github.com/dramonline/migrate_dram"
+    "issues": "https://www.github.com/dramonline/dram-migrate",
+    "source": "https://www.github.com/dramonline/dram-migrate"
   },
   "require": { }
 }

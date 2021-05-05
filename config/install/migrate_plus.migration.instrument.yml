@@ -23,7 +23,7 @@ process:
 # Destination plugin
 destination:
   plugin: entity:taxonomy_term
-  default_bundle: instruments
+  default_bundle: instrument
 
 # Nothing needed here, it is a single table without any other relation.
 migration_dependencies: {}

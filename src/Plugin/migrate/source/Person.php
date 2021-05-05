@@ -1,14 +1,8 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\migrate_dram\Plugin\migrate\source\Person
- */
-
-namespace Drupal\migrate_dram\Plugin\migrate\source;
+namespace Drupal\dram_migrate\Plugin\migrate\source;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
-use Drupal\migrate\Row;
 
 /**
  * Minimalistic example for a SqlBase source plugin.
@@ -25,10 +19,10 @@ class Person extends SqlBase {
   public function query() {
     $query = $this->select('artist', 'a')
       ->fields('a', [
-          'id',
-          'legacy_id',
-          'name'
-        ]);
+        'id',
+        'legacy_id',
+        'name',
+      ]);
     return $query;
   }
 
@@ -37,9 +31,9 @@ class Person extends SqlBase {
    */
   public function fields() {
     $fields = [
-      'id' => $this->t('person_dram_id' ),
-      'legacy_id' => $this->t('legacy_id' ),
-      'name'   => $this->t('title' )
+      'id' => $this->t('person_dram_id'),
+      'legacy_id' => $this->t('legacy_id'),
+      'name'   => $this->t('title'),
     ];
     return $fields;
   }
@@ -55,4 +49,5 @@ class Person extends SqlBase {
       ],
     ];
   }
+
 }

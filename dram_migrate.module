@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains migrate_dram.module.
+ * Contains dram_migrate.module.
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -10,9 +10,9 @@ use Drupal\Core\Routing\RouteMatchInterface;
 /**
  * Implements hook_help().
  */
-function migrate_dram_help($route_name, RouteMatchInterface $route_match) {
+function dram_migrate_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
-    case 'help.page.migrate_dram':
+    case 'help.page.dram_migrate':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('Migration from MYSQL tables to Drupal core entities') . '</p>';
@@ -25,9 +25,9 @@ function migrate_dram_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_theme().
  */
-function migrate_dram() {
+function dram_migrate() {
   return [
-    'migrate_dram' => [
+    'dram_migrate' => [
       'render element' => 'children',
     ],
   ];
@@ -38,15 +38,16 @@ function migrate_dram() {
  *
  * Removes stale migration configs during uninstall.
  */
-function migrate_dram_uninstall() {
+function dram_migrate_uninstall() {
   $migrations = [
     'album',
     'category',
     'instrument',
     'label',
     'person',
+    'release',
     'track',
-    'work'
+    'work',
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
