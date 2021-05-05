@@ -19,9 +19,13 @@ class Category extends SqlBase {
   public function query() {
     $query = $this->select('instrument', 'i')
       ->fields('i', [
+        'id',
+        'name',
+        'legacy_id',
         'category',
+        'url_code',
       ]
-        );
+    );
     return $query;
   }
 
@@ -29,9 +33,7 @@ class Category extends SqlBase {
    * (@inheritdoc)
    */
   public function fields() {
-    $fields = [
-      'category' => $this->t('Category'),
-    ];
+    $fields = ['category' => $this->t('Category')];
 
     return $fields;
   }
@@ -40,12 +42,7 @@ class Category extends SqlBase {
    * {@inheritdoc}
    */
   public function getIds() {
-    return [
-      'category' => [
-        'type' => 'text',
-        'alias' => 'i',
-      ],
-    ];
+    return ['category' => ['type' => 'text', 'alias' => 'i']];
   }
 
 }

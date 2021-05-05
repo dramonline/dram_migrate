@@ -9,15 +9,31 @@ description: Migration from MYSQL tables to Drupal core entities
 source:
   plugin: category
   track_changes: true
+  constants:
+    NWR_URL: "http://dramonline.org/instruments"
+  ids: id
 
 # Process plugin
 process:
   name: category
+  uid:
+    - plugin: default_value
+      default_value: 3
+  field_dram_id: id
+  field_legacy_id: legacy_id
+  pseudo_link:
+    plugin: concat
+    source:
+      - constants/NWR_URL
+      - url_code
+    delimiter: "/"
+  "field_legacy_url/uri": "@pseudo_link"
+  "field_legacy_url/title": url_code
 
 # Destination plugin
 destination:
   plugin: entity:taxonomy_term
-  default_bundle: instruments
+  default_bundle: instrument
 
 # Nothing needed here, it is a single table without any other relation.
 migration_dependencies: {}

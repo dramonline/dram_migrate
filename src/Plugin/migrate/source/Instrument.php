@@ -21,9 +21,11 @@ class Instrument extends SqlBase {
       ->fields('i', [
         'id',
         'name',
+        'legacy_id',
         'category',
+        'url_code',
       ]
-        );
+    );
     return $query;
   }
 

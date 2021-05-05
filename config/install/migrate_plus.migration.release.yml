@@ -7,7 +7,7 @@ source:
   plugin: release
   track_changes: true
   constants:
-    NWR_URL: 'http://dramonline.org/albums'
+    NWR_URL: "http://dramonline.org/albums"
   ids:
     id:
       type: integer
@@ -22,9 +22,8 @@ process:
     plugin: default_value
     default_value: release
   uid:
-   -
-    plugin: default_value
-    default_value: 3
+    - plugin: default_value
+      default_value: 3
   title: title
   field_subtitle: display_subtitle
   field_dram_id: id
@@ -34,8 +33,7 @@ process:
   field_deprecated: field_deprecated
   field_digital: digital
   field_release_recording_label:
-    -
-      plugin: migration_lookup
+    - plugin: migration_lookup
       migration: label
       source: label_id
   pseudo_link:
@@ -43,8 +41,8 @@ process:
     source:
       - constants/NWR_URL
       - url_code
-    delimiter: '/'
-  "field_legacy_url/uri": '@pseudo_link'
+    delimiter: "/"
+  "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
 
 migration_dependencies: {}
