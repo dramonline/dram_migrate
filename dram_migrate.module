@@ -48,6 +48,7 @@ function dram_migrate_uninstall() {
     'release',
     'track',
     'work',
+    'organization',
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();

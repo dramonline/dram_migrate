@@ -1,0 +1,50 @@
+# Migration metadata
+id: organization
+label: organization
+description: Migration from MYSQL tables to Drupal core entities
+
+source:
+  plugin: csv
+  track_changes: true
+  path: 'public://migrations/organizations.csv'
+  delimiter: ','
+  enclosure: '"'
+  header_offset: 0
+  constants:
+    NWR_URL: 'http://dramonline.org/ensembles'
+  ids: [id]
+
+# Destination plugin
+destination:
+  plugin: entity:node
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: corporate_entity
+  uid:
+    -
+      plugin: default_value
+      default_value: 3
+  title: name
+  field_dram_id: id
+  field_legacy_id: legacy_id
+  field_corporate_entity_org_type:
+    source: type
+    plugin: entity_lookup
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: organization
+    value_key: name
+    ignore_case: true
+  pseudo_link:
+    plugin: concat
+    source:
+      - constants/NWR_URL
+      - url_code
+    delimiter: '/'
+  "field_legacy_url/uri": '@pseudo_link'
+  "field_legacy_url/title": url_code
+
+migration_dependencies: {}
