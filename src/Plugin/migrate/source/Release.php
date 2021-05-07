@@ -30,6 +30,7 @@ class release extends SqlBase {
         'deprecated',
         'digital',
       ]);
+    $query->join('identifier', 'i', 'a.id = i.item_id');
     return $query;
   }
 
@@ -47,7 +48,7 @@ class release extends SqlBase {
       'url_code' => $this->t('url_code'),
       'streaming_approved' => $this->t('streaming_approved'),
       'deprecated' => $this->t('deprecated'),
-      'digital' => $this->t('digital'),
+      'digital' => $this->t('digital')
     ];
     return $fields;
   }
@@ -60,7 +61,7 @@ class release extends SqlBase {
       'id' => [
         'type' => 'integer',
         'alias' => 'a',
-      ],
+      ]
     ];
   }
 
