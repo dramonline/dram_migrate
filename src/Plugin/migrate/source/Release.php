@@ -2,6 +2,7 @@
 
 namespace Drupal\dram_migrate\Plugin\migrate\source;
 
+use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 
 /**
@@ -29,15 +30,15 @@ class release extends SqlBase {
         'streaming_approved',
         'deprecated',
         'digital',
-        ]);
-      $query->join('identifier', 'i', 'a.id = i.item_id');
-      $query->fields('i', [
-          'code',
-          'item_id',
-          'item_table',
-          'type'
-          ]);
-      $query->condition('i.type','upc');
+      ]);
+    $query->join('identifier', 'i', 'a.id = i.item_id');
+    $query->fields('i', [
+      'code',
+      'item_id',
+      'item_table',
+      'type',
+    ]);
+    $query->condition('i.type', 'vendor');
     return $query;
   }
 
@@ -55,9 +56,19 @@ class release extends SqlBase {
       'url_code' => $this->t('url_code'),
       'streaming_approved' => $this->t('streaming_approved'),
       'deprecated' => $this->t('deprecated'),
-      'digital' => $this->t('digital')
+      'digital' => $this->t('digital'),
+      'test_id' => $this->t('code'),
     ];
     return $fields;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function prepareRow(Row $row) {
+    $field1 = $row->getSourceProperty("type");
+    $row->setDestinationProperty("test_id", $field1);
+    return parent::prepareRow($row);
   }
 
   /**
@@ -68,7 +79,7 @@ class release extends SqlBase {
       'id' => [
         'type' => 'integer',
         'alias' => 'a',
-      ]
+      ],
     ];
   }
 
