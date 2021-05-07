@@ -32,10 +32,12 @@ process:
   field_streaming_approved: field_streaming_approved
   field_deprecated: field_deprecated
   field_digital: digital
-  field_release_recording_label:
+  field_recording_label:
     - plugin: migration_lookup
       migration: label
       source: label_id
+  field_upc_id: label_id
+  field_vendor_id: code
   pseudo_link:
     plugin: concat
     source:
@@ -45,4 +47,6 @@ process:
   "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
 
-migration_dependencies: {}
+migration_dependencies:
+  required:
+    - label

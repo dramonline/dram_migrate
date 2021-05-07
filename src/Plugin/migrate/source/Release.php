@@ -29,8 +29,15 @@ class release extends SqlBase {
         'streaming_approved',
         'deprecated',
         'digital',
-      ]);
-    $query->join('identifier', 'i', 'a.id = i.item_id');
+        ]);
+      $query->join('identifier', 'i', 'a.id = i.item_id');
+      $query->fields('i', [
+          'code',
+          'item_id',
+          'item_table',
+          'type'
+          ]);
+      $query->condition('i.type','upc');
     return $query;
   }
 

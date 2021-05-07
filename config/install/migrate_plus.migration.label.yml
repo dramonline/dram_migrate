@@ -9,9 +9,7 @@ source:
   track_changes: true
   constants:
     NWR_URL: 'http://dramonline.org/labels'
-  ids:
-    id:
-      type: integer
+  ids: id
 
 destination:
   plugin: entity:node
