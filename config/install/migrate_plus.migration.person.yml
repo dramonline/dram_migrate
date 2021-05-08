@@ -7,7 +7,7 @@ source:
   plugin: csv
   track_changes: true
   path: 'public://migrations/person.csv'
-  delimiter: ','
+  delimiter: ";"
   enclosure: '"'
   header_offset: 0
   constants:
@@ -22,9 +22,17 @@ process:
   type:
     plugin: default_value
     default_value: person
-  title: name
+  uid:
+    - plugin: default_value
+      default_value: 3
   field_dram_id: id
   field_legacy_id: legacy_id
+  field_active: active
+  field_person_name/given: artist_fname
+  field_person_name/middle: artist_mname
+  field_person_name/family: artist_lname
+  field_person_name/title: artist_prefix
+  field_person_name/generational: artist_suffix
   pseudo_link:
     plugin: concat
     source:

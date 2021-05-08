@@ -8,27 +8,31 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
  * Minimalistic example for a SqlBase source plugin.
  *
  * @MigrateSource(
- *   id = "person"
+ *   id = "performer"
  * )
  */
-class Person extends SqlBase {
+class Performer extends SqlBase {
 
   /**
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('artist', 'a')
-      ->fields('a', [
+    $query = $this->select('artist_item', 'ai')
+      ->fields('ai', [
         'id',
-        'legacy_id',
-        'url_code',
-        'active',
-        'artist_fname',
-        'artist_mname',
-        'artist_lname',
-        'artist_suffix',
-        'artist_prefix'
+        'artist_id',
+        'function_id',
+        'instrument_id',
+        'item_table',
+        'weight',
+        'hidden'
       ]);
+    $query->join('track', 't', 'ai.item_id = t.id');
+    $query->fields('t', [
+      'id',
+      'title',
+    ]);
+    $query->condition('ai.item_table', 'track');
     return $query;
   }
 
@@ -37,9 +41,7 @@ class Person extends SqlBase {
    */
   public function fields() {
     $fields = [
-      'id' => $this->t('person_dram_id'),
-      'legacy_id' => $this->t('legacy_id'),
-      'name'   => $this->t('title'),
+      'id' => $this->t('Paragraph identifier')
     ];
     return $fields;
   }
@@ -51,7 +53,7 @@ class Person extends SqlBase {
     return [
       'id' => [
         'type' => 'integer',
-        'alias' => 'a',
+        'alias' => 'ai',
       ],
     ];
   }

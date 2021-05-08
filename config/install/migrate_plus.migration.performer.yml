@@ -1,0 +1,26 @@
+# Migration metadata
+id: performer
+label: performer
+description: Migration from MYSQL tables to Drupal paragraph entities.
+
+source:
+  plugin: performer
+  track_changes: true
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: performer
+  field_performer:
+    - plugin: migration_lookup
+      migration: person
+      source: artist_id
+      no_stub: true
+
+# Destination plugin
+destination:
+ plugin: 'entity_reference_revisions:paragraph'
+ default_bundle: performer
+
+migration_dependencies: {}

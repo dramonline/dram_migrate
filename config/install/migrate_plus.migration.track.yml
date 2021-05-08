@@ -17,7 +17,26 @@ process:
     default_value: 1
   title: title
   field_dram_id: id
-  track_subtitle: display_subtitle
+  field_subtitle: display_subtitle
+  field_disc_number: disc_number
+  field_track_number: disc_track_number
+  field_related_release:
+    - plugin: migration_lookup
+      migration: release
+      source: album_id
+      no_stub: true
+  field_personnel/target_id:
+    -
+      plugin: migration_lookup
+      migration: performer
+      source: id
+      no_stub: true
+  field_personnel/target_revision_id:
+    -
+      plugin: migration_lookup
+      migration: performer
+      source: id
+      no_stub: true
 
 # Destination plugin
 destination:

@@ -30,15 +30,10 @@ class release extends SqlBase {
         'streaming_approved',
         'deprecated',
         'digital',
+        'vendor_id',
+        'upc_id',
+        'oclc_id'
       ]);
-    $query->join('identifier', 'i', 'a.id = i.item_id');
-    $query->fields('i', [
-      'code',
-      'item_id',
-      'item_table',
-      'type',
-    ]);
-    $query->condition('i.type', 'vendor');
     return $query;
   }
 
@@ -57,18 +52,11 @@ class release extends SqlBase {
       'streaming_approved' => $this->t('streaming_approved'),
       'deprecated' => $this->t('deprecated'),
       'digital' => $this->t('digital'),
-      'test_id' => $this->t('code'),
+      'vendor_id' => $this->t('vendor_id'),
+      'oclc_id' => $this->t('oclc_id'),
+      'upc_id' => $this->t('upc_id'),
     ];
     return $fields;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function prepareRow(Row $row) {
-    $field1 = $row->getSourceProperty("type");
-    $row->setDestinationProperty("test_id", $field1);
-    return parent::prepareRow($row);
   }
 
   /**

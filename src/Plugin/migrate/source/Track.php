@@ -36,6 +36,7 @@ class Track extends SqlBase {
         'recording_circa',
         'streaming_approved',
         'deprecated',
+        'track_number',
         'disc_track_number',
         'disc_number',
       ]);
