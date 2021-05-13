@@ -15,8 +15,11 @@ process:
   field_performer:
     - plugin: migration_lookup
       migration: person
-      source: names
-      no_stub: true
+      source: artist_id
+  field_instrument:
+    - plugin: migration_lookup
+      migration: instrument
+      source: instrument_id
 
 # Destination plugin
 destination:
