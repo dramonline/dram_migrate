@@ -2,6 +2,7 @@
 
 namespace Drupal\dram_migrate\Plugin\migrate\source;
 
+use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 
 /**
@@ -13,6 +14,7 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
  */
 class Track extends SqlBase {
 
+
   /**
    * {@inheritdoc}
    */
@@ -20,26 +22,14 @@ class Track extends SqlBase {
     $query = $this->select('track', 't')
       ->fields('t', [
         'id',
-        'legacy_id',
-        'label_id',
-        'album_id',
-        'work_id',
-        'track_number',
         'title',
-        'display_subtitle',
-        'runtime',
-        'composition_start',
-        'composition_end',
-        'composition_circa',
-        'recording_start',
-        'recording_end',
-        'recording_circa',
-        'streaming_approved',
-        'deprecated',
-        'track_number',
-        'disc_track_number',
-        'disc_number',
       ]);
+      $query->join('artist_item','ai', 't.id = ai.item_id');
+      $query->fields('ai', [
+        'artist_id',
+        'item_id'
+      ])->range(0,3);
+
     return $query;
   }
 
@@ -49,12 +39,67 @@ class Track extends SqlBase {
   public function fields() {
     $fields = [
       'id' => $this->t('DRAM identifier'),
-      'legacy_id' => $this - t('Legacy identifier'),
-      'title' => $this->t('Track title'),
-      'display_subtitle' => $this->t('Track subtitle'),
+      'title' => $this->t('Title'),
+      'artist_id' => $this->t('Artist identifier'),
     ];
     return $fields;
   }
+
+
+  /**
+   * {@inheritdoc}
+   */
+  public function prepareRow(Row $row) {
+    parent::prepareRow($row);
+    // 1. var_dump shows the content of the $row object.
+    // var_dump($row->getSourceIdValues($source));
+
+    // 2. renders an empty array
+
+    // 3. renders the source array
+    $source = $row->getSourceProperty('source');
+    // echo(gettype($source) . PHP_EOL);
+
+    // 4. retrieves value from the artist_id source property
+    // var_dump($row->getSourceProperty('artist_id'));
+    $source_artist_id = $row->getSourceProperty('artist_id');
+
+    // echo ('the artist_id type is: ' . gettype($source_artist_id) . PHP_EOL);
+    // echo ('the artist_id is: ' . $source_artist_id . PHP_EOL);
+    // echo (gettype($artist_ids . PHP_EOL));
+
+    // foreach ($artist_ids as $source_artist_id) {
+    //   echo ('this is the source artist id: ' . $source_artist_id . PHP_EOL);
+    // }
+
+    // $artist_ids = $this->select('artist_item', 'ai')
+    //   ->fields('ai', ['artist_id'])
+    //   ->condition('id', $row->getSourceProperty('item_id'), '=')
+    //   ->execute()
+    //   ->fetchCol();
+    // $row->setSourceProperty('artists', $artist_ids);
+
+    // $foo = $row->getSourceProperty('item_id');
+    // var_dump($foo);
+    // echo ($foo . PHP_EOL);
+
+    $artist_ids = $this->select('artist_item', 'ai')
+      ->fields('ai', ['artist_id'])
+      ->condition('item_id', $row->getSourceProperty('item_id'), '=')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('names', $artist_ids);
+
+    $function_ids = $this->select('artist_item', 'ai')
+      ->fields('ai', ['function_id'])
+      ->condition('item_id', $row->getSourceProperty('item_id'), '=')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('functions', $function_ids);
+  }
+
+
+
 
   /**
    * {@inheritdoc}
@@ -67,5 +112,4 @@ class Track extends SqlBase {
       ],
     ];
   }
-
 }

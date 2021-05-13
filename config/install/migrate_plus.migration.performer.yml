@@ -15,12 +15,12 @@ process:
   field_performer:
     - plugin: migration_lookup
       migration: person
-      source: artist_id
+      source: names
       no_stub: true
 
 # Destination plugin
 destination:
- plugin: 'entity_reference_revisions:paragraph'
- default_bundle: performer
+  plugin: "entity_reference_revisions:paragraph"
+  default_bundle: performer
 
 migration_dependencies: {}

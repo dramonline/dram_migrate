@@ -9,8 +9,6 @@ description: Migration from MYSQL tables to Drupal core entities
 source:
   plugin: category
   track_changes: true
-  constants:
-    NWR_URL: "http://dramonline.org/instruments"
   ids: id
 
 # Process plugin
@@ -19,16 +17,7 @@ process:
   uid:
     - plugin: default_value
       default_value: 3
-  field_dram_id: id
-  field_legacy_id: legacy_id
-  pseudo_link:
-    plugin: concat
-    source:
-      - constants/NWR_URL
-      - url_code
-    delimiter: "/"
-  "field_legacy_url/uri": "@pseudo_link"
-  "field_legacy_url/title": url_code
+      plugin: concat
 
 # Destination plugin
 destination:

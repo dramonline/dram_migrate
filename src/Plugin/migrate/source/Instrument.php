@@ -35,6 +35,7 @@ class Instrument extends SqlBase {
   public function fields() {
     $fields = [
       'id' => $this->t('DRAM identifier'),
+      'legacy' => $this->t('Legacy identifier'),
       'name' => $this->t('Instrument name'),
       'category' => $this->t('Category'),
     ];

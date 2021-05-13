@@ -17,26 +17,30 @@ process:
     default_value: 1
   title: title
   field_dram_id: id
-  field_subtitle: display_subtitle
-  field_disc_number: disc_number
-  field_track_number: disc_track_number
-  field_related_release:
+  field_person:
     - plugin: migration_lookup
-      migration: release
-      source: album_id
+      migration: person
+      source: names
       no_stub: true
-  field_personnel/target_id:
-    -
-      plugin: migration_lookup
-      migration: performer
-      source: id
-      no_stub: true
-  field_personnel/target_revision_id:
-    -
-      plugin: migration_lookup
-      migration: performer
-      source: id
-      no_stub: true
+  # field_function: functions
+  # field_subtitle: display_subtitle
+  # field_disc_number: disc_number
+  # field_track_number: disc_track_number
+  # field_related_release:
+  #   - plugin: migration_lookup
+  #     migration: release
+  #     source: album_id
+  #     no_stub: true
+  # field_personnel/target_id:
+  #   - plugin: migration_lookup
+  #     migration: person
+  #     source: id
+  #     no_stub: true
+  # field_personnel/target_revision_id:
+  #   - plugin: migration_lookup
+  #     migration: person
+  #     source: id
+  #     no_stub: true
 
 # Destination plugin
 destination:
