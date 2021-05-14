@@ -22,13 +22,14 @@ class Performer extends SqlBase {
       ->fields('ai', [
         'id',
         'artist_id',
+        'function_id',
         'instrument_id',
         'item_id',
-        'item_table'
+        'item_table',
+        'ancillary'
       ])
       ->condition('item_table', 'track', '=')
-      ->orderBy('item_id','ASC')
-      ->range(0,10);
+      ->orderBy('id','ASC');
 
       return $query;
   }
@@ -42,7 +43,9 @@ class Performer extends SqlBase {
       'item_id' => $this->t('Item identifier'),
       'artist_id' => $this->t('Artist identifier'),
       'item_table' => $this->t('Item table'),
-      'instrument' => $this->t('Instrument identifier'),
+      'instrument_id' => $this->t('Instrument identifier'),
+      'function_id' => $this->t('Function identifier'),
+      'ancillary' => $this->t('Ancillary'),
     ];
     return $fields;
   }

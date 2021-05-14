@@ -22,13 +22,14 @@ class Track extends SqlBase {
     $query = $this->select('track', 't')
       ->fields('t', [
         'id',
+        'legacy_id',
         'title',
       ]);
       $query->join('artist_item','ai', 't.id = ai.item_id');
       $query->fields('ai', [
         'artist_id',
         'item_id'
-      ])->range(0,3);
+      ]);
 
     return $query;
   }
@@ -83,23 +84,14 @@ class Track extends SqlBase {
     // var_dump($foo);
     // echo ($foo . PHP_EOL);
 
-    $artist_ids = $this->select('artist_item', 'ai')
-      ->fields('ai', ['artist_id'])
+    $performer_ids = $this->select('artist_item', 'ai')
+      ->fields('ai', ['id'])
       ->condition('item_id', $row->getSourceProperty('item_id'), '=')
       ->execute()
       ->fetchCol();
-    $row->setSourceProperty('names', $artist_ids);
+    $row->setSourceProperty('performer_ids', $performer_ids);
 
-    $function_ids = $this->select('artist_item', 'ai')
-      ->fields('ai', ['function_id'])
-      ->condition('item_id', $row->getSourceProperty('item_id'), '=')
-      ->execute()
-      ->fetchCol();
-    $row->setSourceProperty('functions', $function_ids);
   }
-
-
-
 
   /**
    * {@inheritdoc}

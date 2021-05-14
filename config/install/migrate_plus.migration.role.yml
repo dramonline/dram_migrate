@@ -1,30 +1,28 @@
 # Migration metadata
-id: category
-label: category
-migration_group: instrument_hierarchy
+id: role
+label: role
 description: Migration from MYSQL tables to Drupal core entities
 
 # Source plugin, id defined in the @MigrateSource annotation
 # in the src/Plugin/migrate/source/Company.php file.
 source:
-  plugin: category
+  plugin: role
   track_changes: true
   ids: id
 
 # Process plugin
 process:
-process:
+  name: name
   uid:
     - plugin: default_value
       default_value: 3
-  name: name
   field_dram_id/value: id
   field_legacy_id: legacy_id
 
 # Destination plugin
 destination:
   plugin: entity:taxonomy_term
-  default_bundle: instrument
+  default_bundle: role
 
 # Nothing needed here, it is a single table without any other relation.
 migration_dependencies: {}
