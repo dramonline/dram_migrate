@@ -27,20 +27,21 @@ process:
   #     migration: release
   #     source: album_id
   #     no_stub: true
-  field_personnel/target_id:
-    -
-      plugin: migration_lookup
-      migration: performer
-      no_stub: true
-      source: performer_ids
-    -
-      plugin: extract
-      index:
-        - '0'
+  # field_personnel/target_id:
+  #   -
+  #     plugin: migration_lookup
+  #     migration: performer
+  #     no_stub: true
+  #     source: performer_ids
+  #   -
+  #     plugin: extract
+  #     index:
+  #       - '0'
 
   field_personnel:
     -
       plugin: migration_lookup
+      source: performer_ids
       migration: performer
       no_stub: true
     -

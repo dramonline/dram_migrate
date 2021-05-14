@@ -24,7 +24,7 @@ class Track extends SqlBase {
         'id',
         'legacy_id',
         'title',
-      ]);
+      ])->condition('t.id','57418','=');
       $query->join('artist_item','ai', 't.id = ai.item_id');
       $query->fields('ai', [
         'artist_id',
