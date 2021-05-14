@@ -33,6 +33,14 @@ class release extends SqlBase {
         'vendor_id',
         'upc_id',
         'oclc_id'
+      ])->orderBy('a.id','ASC');
+      $query->join('copyright','c','a.id = c.item_id');
+      $query->join('nots')
+      $query->fields('c', [
+        'item_id',
+        'c_line',
+        'p_line',
+        'royalty_code'
       ]);
     return $query;
   }
@@ -55,6 +63,7 @@ class release extends SqlBase {
       'vendor_id' => $this->t('vendor_id'),
       'oclc_id' => $this->t('oclc_id'),
       'upc_id' => $this->t('upc_id'),
+      'c_line' => $this->t('c_line')
     ];
     return $fields;
   }

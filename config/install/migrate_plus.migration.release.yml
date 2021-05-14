@@ -23,7 +23,7 @@ process:
     default_value: release
   uid:
     - plugin: default_value
-      default_value: 3
+      default_value: 2
   title: title
   field_subtitle: display_subtitle
   field_dram_id: id
@@ -40,6 +40,9 @@ process:
   field_vendor_id: vendor_id
   field_oclc_id: oclc_id
   field_upc_id: upc_id
+  field_royalty_id: royalty_code
+  field_copyright: c_line
+  field_patent: p_line
   pseudo_link:
     plugin: concat
     source:
