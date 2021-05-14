@@ -32,16 +32,26 @@ class release extends SqlBase {
         'digital',
         'vendor_id',
         'upc_id',
-        'oclc_id'
+        'oclc_id',
+        'composition_start',
+        'composition_end',
+        'composition_circa',
+        'recording_start',
+        'recording_end',
+        'recording_circa'
       ])->orderBy('a.id','ASC');
       $query->join('copyright','c','a.id = c.item_id');
-      $query->join('nots')
+      // $query->join('note','n','a.id = n.item_id');
       $query->fields('c', [
         'item_id',
         'c_line',
         'p_line',
-        'royalty_code'
       ]);
+
+      // $query->fields('n', [
+      //   'type',
+      //   'data',
+      // ]);
     return $query;
   }
 

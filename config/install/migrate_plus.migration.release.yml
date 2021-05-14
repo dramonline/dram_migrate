@@ -8,6 +8,7 @@ source:
   track_changes: true
   constants:
     NWR_URL: "http://dramonline.org/albums"
+    APPEND_DATE: "-01-01"
   ids:
     id:
       type: integer
@@ -37,20 +38,40 @@ process:
       migration: label
       source: label_id
       no_stub: true
+  field_copyright_agent:
+    - plugin: migration_lookup
+      migration: label
+      source: label_id
+      no_stub: true
+  field_patent_agent:
+    - plugin: migration_lookup
+      migration: label
+      source: label_id
+      no_stub: true
   field_vendor_id: vendor_id
   field_oclc_id: oclc_id
   field_upc_id: upc_id
-  field_royalty_id: royalty_code
-  field_copyright: c_line
-  field_patent: p_line
-  pseudo_link:
-    plugin: concat
-    source:
-      - constants/NWR_URL
-      - url_code
-    delimiter: "/"
   "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
+  pseudo_link_c_line:
+    plugin: concat
+    source:
+      - c_line
+      - constants/APPEND_DATE
+  pseudo_link_p_line:
+    plugin: concat
+    source:
+      - p_line
+      - constants/APPEND_DATE
+  field_date_range_copyright/value: "@pseudo_link_c_line"
+  field_date_range_patent/value: "@pseudo_link_p_line"
+  field_date_range_comp/value: composition_start
+  field_date_range_comp/end_value: composition_end
+  field_date_range_comp_circa: composition_circa
+  field_date_range_record/start: recording_start
+  field_date_range_record/end_value: recording_end
+  field_date_range_record_circa: recording_circa
+
 # migration_dependencies:
 #   required:
 #     - label
