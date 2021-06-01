@@ -6,10 +6,9 @@ description: Migration from MYSQL tables to Drupal core entities
 source:
   plugin: csv
   track_changes: true
-  path: 'public://migrations/person.csv'
+  path: 'public://migrations/person_test.csv'
   delimiter: ";"
   enclosure: '"'
-  header_offset: 0
   constants:
     NWR_URL: 'http://dramonline.org/person'
   ids: [id]
