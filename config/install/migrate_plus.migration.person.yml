@@ -23,7 +23,7 @@ process:
     default_value: person
   uid:
     - plugin: default_value
-      default_value: 3
+      default_value: 2
   field_dram_id: id
   field_legacy_id: legacy_id
   field_active: active

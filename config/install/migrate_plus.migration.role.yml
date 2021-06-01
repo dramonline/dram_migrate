@@ -15,7 +15,7 @@ process:
   name: name
   uid:
     - plugin: default_value
-      default_value: 3
+      default_value: 2
   field_dram_id/value: id
   field_legacy_id: legacy_id
 

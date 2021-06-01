@@ -58,7 +58,7 @@ class Performer extends SqlBase {
     parent::prepareRow($row);
 
     $source = $row->getSourceProperty('source');
-    // var_dump($row);
+      var_dump($row);
   }
 
   /**

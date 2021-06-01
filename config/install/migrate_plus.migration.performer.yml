@@ -9,6 +9,9 @@ source:
 
 # Process plugin
 process:
+  uid:
+    - plugin: default_value
+      default_value: 2
   type:
     plugin: default_value
     default_value: performer
