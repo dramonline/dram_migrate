@@ -1,12 +1,12 @@
 # Migration metadata
-id: organization
-label: organization
+id: ensemble
+label: ensemble
 description: Migration from MYSQL tables to Drupal core entities
 
 source:
   plugin: csv
   track_changes: true
-  path: 'public://migrations/organizations.csv'
+  path: 'public://migrations/ensembles.csv'
   delimiter: ','
   enclosure: '"'
   header_offset: 0
@@ -22,7 +22,7 @@ destination:
 process:
   type:
     plugin: default_value
-    default_value: corporate_entity
+    default_value: ensemble
   uid:
     -
       plugin: default_value
@@ -30,14 +30,6 @@ process:
   title: name
   field_dram_id: id
   field_legacy_id: legacy_id
-  field_corporate_entity_org_type:
-    source: type
-    plugin: entity_lookup
-    entity_type: taxonomy_term
-    bundle_key: vid
-    bundle: organization
-    value_key: name
-    ignore_case: true
   pseudo_link:
     plugin: concat
     source:

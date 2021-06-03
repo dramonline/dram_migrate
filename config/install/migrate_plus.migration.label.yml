@@ -17,7 +17,7 @@ destination:
 process:
   type:
     plugin: default_value
-    default_value: corporate_entity
+    default_value: recording_label
   uid:
     - plugin: default_value
       default_value: 2
@@ -28,9 +28,6 @@ process:
   "body/format":
     - plugin: default_value
       default_value: full_html
-  field_corporate_entity_org_type:
-    - plugin: default_value
-      default_value: 1
   pseudo_link:
     plugin: concat
     source:
