@@ -6,11 +6,11 @@ description: Migration from MYSQL tables to Drupal core entities
 source:
   plugin: csv
   track_changes: true
-  path: 'public://migrations/person_test.csv'
+  path: "public://migrations/person_test.csv"
   delimiter: ";"
   enclosure: '"'
   constants:
-    NWR_URL: 'http://dramonline.org/person'
+    NWR_URL: "http://dramonline.org/person"
   ids: [id]
 # Destination plugin
 destination:
@@ -37,8 +37,8 @@ process:
     source:
       - constants/NWR_URL
       - url_code
-    delimiter: '/'
-  "field_legacy_url/uri": '@pseudo_link'
+    delimiter: "/"
+  "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
 
 migration_dependencies: {}

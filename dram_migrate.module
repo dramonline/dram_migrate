@@ -51,7 +51,8 @@ function dram_migrate_uninstall() {
     'organization',
     'performer',
     'instrument_hierarchy',
-    'role'
+    'role',
+    'ensemble'
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
