@@ -1,30 +1,33 @@
 # Migration metadata
-id: person
-label: person
+id: ensemble
+label: ensemble
 description: Migration from MYSQL tables to Drupal core entities
 
 source:
-  plugin: person
+  plugin: ensemble
   track_changes: true
   constants:
-    NWR_URL: "http://dramonline.org/person"
+    NWR_URL: "http://dramonline.org/ensembles"
+  ids:
+    id:
+      type: integer
+
+# Destination plugin
+destination:
+  plugin: entity:node
 
 # Process plugin
 process:
   type:
     plugin: default_value
-    default_value: person
+    default_value: ensemble
   uid:
     - plugin: default_value
       default_value: 2
+  title: name
   field_dram_id: id
   field_legacy_id: legacy_id
   field_active: active
-  field_person_name/given: artist_fname
-  field_person_name/middle: artist_mname
-  field_person_name/family: artist_lname
-  field_person_name/title: artist_prefix
-  field_person_name/generational: artist_suffix
   pseudo_link:
     plugin: concat
     source:
@@ -33,9 +36,5 @@ process:
     delimiter: "/"
   "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
-
-# Destination plugin
-destination:
-  plugin: entity:node
 
 migration_dependencies: {}

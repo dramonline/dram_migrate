@@ -18,15 +18,6 @@ process:
   title: title
   field_dram_id: id
   field_legacy_id: legacy_id
-  # field_temp: performer_ids
-  # field_subtitle: display_subtitle
-  # field_disc_number: disc_number
-  # field_track_number: disc_track_number
-  # field_related_release:
-  #   - plugin: migration_lookup
-  #     migration: release
-  #     source: album_id
-  #     no_stub: true
   # field_personnel/target_id:
   #   -
   #     plugin: migration_lookup
@@ -38,17 +29,34 @@ process:
   #     index:
   #       - '0'
 
-  field_personnel:
-    -
-      plugin: migration_lookup
-      source: performer_ids
-      migration: performer
-      no_stub: true
-    -
-      plugin: sub_process
+  # field_personnel:
+  #   - plugin: migration_lookup
+  #     source: performer_ids
+  #     migration: performer
+  #     no_stub: true
+  #   - plugin: sub_process
+  #     process:
+  #       target_id: "0"
+  #       target_revision_id: "1"
+
+  # works for a single row
+  field_ensemble:
+    - plugin: migration_lookup
+      migration: ensemble
+      source: artist_id
+
+  field_ensemble:
+    - plugin: sub_process
+      source: artist_id
       process:
-        target_id: '0'
-        target_revision_id: '1'
+        plugin: skip_on_empty
+        method: row
+        target_id:
+          plugin: migration_lookup
+          migration: ensemble
+          source: target_id
+
+  field_value: artist_id
 
 # Destination plugin
 destination:
