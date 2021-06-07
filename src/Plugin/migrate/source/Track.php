@@ -93,12 +93,13 @@ class Track extends SqlBase {
     //   ->fetchCol();
     // $row->setSourceProperty('performer_ids', $performer_ids);
 
-    $performer_ids = $this->select('ensemble_item_test', 'eit')
-      ->fields('eit', ['id'])
-      ->condition('item_id', $row->getSourceProperty('item_id'), '=')
+    $query = $this->select('track_test', 'tt')
+      ->fields('tt', ['id, title']);
+    $query->join('ensemble_item_test', 'eit', 'eit.item_id = tt.id')
       ->execute()
       ->fetchCol();
-    $row->setSourceProperty('performer_ids', $performer_ids);
+
+    $performer_ids = $row->setSourceProperty('performer_ids', $performer_ids);
 
     var_dump($performer_ids);
 
