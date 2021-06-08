@@ -43,20 +43,18 @@ process:
   field_ensemble:
     - plugin: migration_lookup
       migration: ensemble
-      source: artist_id
+      source: performer_ids
 
-  field_ensemble:
-    - plugin: sub_process
-      source: artist_id
-      process:
-        plugin: skip_on_empty
-        method: row
-        target_id:
-          plugin: migration_lookup
-          migration: ensemble
-          source: target_id
+  # field_ensemble:
+  #   - plugin: sub_process
+  #     source: performer_ids
+  #     process:
+  #       target_id:
+  #         plugin: migration_lookup
+  #         migration: ensemble
+  #         source: id
 
-  field_value: artist_id
+  field_value: performer_ids
 
 # Destination plugin
 destination:

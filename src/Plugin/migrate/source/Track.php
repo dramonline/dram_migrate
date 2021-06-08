@@ -25,11 +25,11 @@ class Track extends SqlBase {
         'legacy_id',
         'title',
       ]);
-      $query->leftJoin('ensemble_item_test','ei', 't.id = ei.item_id');
-      $query->fields('ei', [
-        'artist_id',
-        'item_id'
-      ]);
+      // $query->leftJoin('ensemble_item_test','ei', 't.id = ei.item_id');
+      // $query->fields('ei', [
+      //   'artist_id',
+      //   'item_id'
+      // ]);
 
     return $query;
   }
@@ -93,15 +93,37 @@ class Track extends SqlBase {
     //   ->fetchCol();
     // $row->setSourceProperty('performer_ids', $performer_ids);
 
-    $query = $this->select('track_test', 'tt')
-      ->fields('tt', ['id, title']);
-    $query->join('ensemble_item_test', 'eit', 'eit.item_id = tt.id')
-      ->execute()
-      ->fetchCol();
+    // $query = $this->select('track_test', 'tt')
+    //   ->fields('tt', [
+    //     'id'
+    //     ]);
+    // $query->join('ensemble_item_test', 'eit', 'tt.id = eit.item_id');
+    // $foo = $query->fields('eit', [
+    //     'artist_id'
+    // ]);
+    // $results = $foo->execute()->fetchCol();
+    // $row->setSourceProperty('performer_ids', $results);
 
-    $performer_ids = $row->setSourceProperty('performer_ids', $performer_ids);
+    // // $pid = $row->getSourceProperty('artist_id');
+    // // $row->setSourceProperty('performer_ids', $pid);
 
-    var_dump($performer_ids);
+    // echo(gettype($results) . PHP_EOL);
+    // echo(gettype($results) . PHP_EOL);
+
+
+    $query = $this->select('ensemble_item_test', 'eit')
+      ->fields('eit', [
+        'artist_id'
+        ]);
+    $query->leftJoin('track_test', 'tt', 'eit.item_id = tt.id');
+    $foo = $query->fields('eit', [
+        'artist_id'
+    ]);
+    $results = $foo->execute()->fetchCol();
+    $row->setSourceProperty('performer_ids', $results);
+
+    echo(gettype($results) . PHP_EOL);
+    echo(gettype($results) . PHP_EOL);
 
   }
 
