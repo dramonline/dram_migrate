@@ -38,7 +38,15 @@ class Track extends SqlBase {
   public function prepareRow(Row $row) {
     $tid = $row->getSourceProperty('id');
 
+    $ensemble = $this->select('ensemble_item_test', 'eit')
+      ->fields('eit', ['item_id'])
+      ->condition('eit.item_id', $tid)
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('ensemble_ids', $ensemble);
+
     echo ($tid . PHP_EOL);
+    echo ($ensemble . PHP_EOL);
 
     return parent::prepareRow($row);
   }
