@@ -28,7 +28,7 @@ class Performer extends SqlBase {
         'item_table',
         'ancillary'
       ])
-      ->condition('item_table', 'track', '=')
+      // ->condition('item_table', 'track', '=')
       ->orderBy('id','ASC');
 
       return $query;
@@ -39,26 +39,9 @@ class Performer extends SqlBase {
    */
   public function fields() {
     $fields = [
-      'id' => $this->t('Unique identifier'),
-      'item_id' => $this->t('Item identifier'),
-      'artist_id' => $this->t('Artist identifier'),
-      'item_table' => $this->t('Item table'),
-      'instrument_id' => $this->t('Instrument identifier'),
-      'function_id' => $this->t('Function identifier'),
-      'ancillary' => $this->t('Ancillary'),
+      'id' => $this->t('Unique identifier')
     ];
     return $fields;
-  }
-
-
-  /**
-   * {@inheritdoc}
-   */
-  public function prepareRow(Row $row) {
-    parent::prepareRow($row);
-
-    $source = $row->getSourceProperty('source');
-      var_dump($row);
   }
 
   /**

@@ -19,7 +19,7 @@ class Track extends SqlBase {
    */
   public function query() {
     return $this->select('track_test', 't')
-      ->fields('t');
+      ->fields('t', ['id','legacy_id','title']);
   }
 
   /**
@@ -36,17 +36,24 @@ class Track extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    $tid = $row->getSourceProperty('id');
+    $track_ids = $row->getSourceProperty('id');
 
-    $ensemble = $this->select('ensemble_item_test', 'eit')
-      ->fields('eit', ['item_id'])
-      ->condition('eit.item_id', $tid)
+    $ensembles = $this->select('ensemble_item_test', 'eit')
+      ->fields('eit', ['artist_id'])
+      ->condition('eit.item_id', $track_ids)
       ->execute()
       ->fetchCol();
-    $row->setSourceProperty('ensemble_ids', $ensemble);
+    $row->setSourceProperty('ensemble_ids', $ensembles);
 
-    echo ($tid . PHP_EOL);
-    echo ($ensemble . PHP_EOL);
+    $artists = $this->select('artist_item', 'ait')
+      ->fields('ait', ['artist_id'])
+      ->condition('ait.item_id', $track_ids)
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('artist_ids', $artists);
+
+    // echo ($track_ids . PHP_EOL);
+    // echo ($ensemble . PHP_EOL);
 
     return parent::prepareRow($row);
   }

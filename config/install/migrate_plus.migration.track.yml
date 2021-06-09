@@ -31,7 +31,7 @@ process:
 
   # field_personnel:
   #   - plugin: migration_lookup
-  #     source: performer_ids
+  #     source: artist_ids
   #     migration: performer
   #     no_stub: true
   #   - plugin: sub_process
@@ -43,7 +43,7 @@ process:
   field_ensemble:
     - plugin: migration_lookup
       migration: ensemble
-      source: performer_ids
+      source: ensemble_ids
 
   # field_ensemble:
   #   - plugin: sub_process
@@ -53,8 +53,6 @@ process:
   #         plugin: migration_lookup
   #         migration: ensemble
   #         source: id
-
-  field_value: performer_ids
 
 # Destination plugin
 destination:

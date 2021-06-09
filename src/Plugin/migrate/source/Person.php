@@ -18,7 +18,7 @@ class Person extends SqlBase {
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('person', 'p')
+    $query = $this->select('person_test', 'p')
       ->fields('p', [
         'id',
         'legacy_id',
