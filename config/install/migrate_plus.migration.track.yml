@@ -21,23 +21,6 @@ process:
   title: title
   field_dram_id: id
   field_legacy_id: legacy_id
-  field_personnel/target_id:
-    - plugin: migration_lookup
-      migration: performer
-      no_stub: true
-      source: id
-    - plugin: extract
-      index:
-        - "0"
-  field_personnel/target_revision_id:
-    - plugin: migration_lookup
-      migration: performer
-      no_stub: true
-      source: id
-    - plugin: extract
-      index:
-        - "1"
-
   # field_personnel:
   #   - plugin: migration_lookup
   #     source: id
@@ -54,14 +37,15 @@ process:
       migration: ensemble
       source: ensemble_ids
 
-  # field_ensemble:
-  #   - plugin: sub_process
-  #     source: performer_ids
-  #     process:
-  #       target_id:
-  #         plugin: migration_lookup
-  #         migration: ensemble
-  #         source: id
+  field_personnel:
+    - plugin: migration_lookup
+      source: performer_ids
+      migration: performer
+      no_stub: true
+    - plugin: sub_process
+      process:
+        target_id: "0"
+        target_revision_id: "1"
 
 # Destination plugin
 destination:

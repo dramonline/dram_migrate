@@ -45,14 +45,14 @@ class Track extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('ensemble_ids', $ensembles);
 
-    $artists = $this->select('artist_item', 'ait')
-      ->fields('ait', ['id'])
-      ->condition('ait.item_id', $track_ids)
+    $performer_ids = $this->select('artist_item', 'ai')
+      ->fields('ai', ['id'])
+      // ->condition('item_id', $row->getSourceProperty('item_id'), '=')
       ->execute()
       ->fetchCol();
-    $row->setSourceProperty('artist_ids', $artists);
+    $row->setSourceProperty('performer_ids', $performer_ids);
 
-    // echo ($track_ids . PHP_EOL);
+    echo ($performer_ids . PHP_EOL);
     // echo ($ensemble . PHP_EOL);
 
     return parent::prepareRow($row);
