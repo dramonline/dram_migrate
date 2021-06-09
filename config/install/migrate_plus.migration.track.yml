@@ -6,6 +6,9 @@ description: Migration from MYSQL tables to Drupal core entities
 source:
   plugin: track
   track_changes: true
+  ids:
+    id:
+      type: integer
 
 # Process plugin
 process:
@@ -18,20 +21,26 @@ process:
   title: title
   field_dram_id: id
   field_legacy_id: legacy_id
-  # field_personnel/target_id:
-  #   -
-  #     plugin: migration_lookup
-  #     migration: performer
-  #     no_stub: true
-  #     source: performer_ids
-  #   -
-  #     plugin: extract
-  #     index:
-  #       - '0'
+  field_personnel/target_id:
+    - plugin: migration_lookup
+      migration: performer
+      no_stub: true
+      source: id
+    - plugin: extract
+      index:
+        - "0"
+  field_personnel/target_revision_id:
+    - plugin: migration_lookup
+      migration: performer
+      no_stub: true
+      source: id
+    - plugin: extract
+      index:
+        - "1"
 
   # field_personnel:
   #   - plugin: migration_lookup
-  #     source: artist_ids
+  #     source: id
   #     migration: performer
   #     no_stub: true
   #   - plugin: sub_process

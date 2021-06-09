@@ -6,6 +6,9 @@ description: Migration from MYSQL tables to Drupal paragraph entities.
 source:
   plugin: performer
   track_changes: true
+  ids:
+    id:
+      type: integer
 
 # Process plugin
 process:

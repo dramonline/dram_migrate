@@ -46,7 +46,7 @@ class Track extends SqlBase {
     $row->setSourceProperty('ensemble_ids', $ensembles);
 
     $artists = $this->select('artist_item', 'ait')
-      ->fields('ait', ['artist_id'])
+      ->fields('ait', ['id'])
       ->condition('ait.item_id', $track_ids)
       ->execute()
       ->fetchCol();
