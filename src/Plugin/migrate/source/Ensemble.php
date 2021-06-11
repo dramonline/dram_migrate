@@ -13,7 +13,6 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
  */
 class Ensemble extends SqlBase {
 
-
   /**
    * {@inheritdoc}
    */

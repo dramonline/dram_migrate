@@ -21,21 +21,18 @@ process:
   title: title
   field_dram_id: id
   field_legacy_id: legacy_id
-  # field_personnel:
-  #   - plugin: migration_lookup
-  #     source: id
-  #     migration: performer
-  #     no_stub: true
-  #   - plugin: sub_process
-  #     process:
-  #       target_id: "0"
-  #       target_revision_id: "1"
+  field_disc_number: disc_number
+  field_track_number: disc_track_number
 
-  # works for a single row
   field_ensemble:
     - plugin: migration_lookup
       migration: ensemble
       source: ensemble_ids
+
+  field_composer:
+    - plugin: migration_lookup
+      migration: person
+      source: composer_ids
 
   field_personnel:
     - plugin: migration_lookup

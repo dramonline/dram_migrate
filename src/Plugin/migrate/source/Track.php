@@ -23,11 +23,14 @@ class Track extends SqlBase {
         'id',
         'legacy_id',
         'title',
+        'disc_number',
+        'disc_track_number',
       ]);
       $query->leftJoin('artist_item','ai', 't.id = ai.item_id');
       $query->fields('ai', [
         'artist_id',
-        'item_id'
+        'item_id',
+        'function_id'
       ]);
 
     return $query;
@@ -38,9 +41,7 @@ class Track extends SqlBase {
    */
   public function fields() {
     $fields = [
-      'id' => $this->t('DRAM identifier'),
-      'title' => $this->t('Title'),
-      'artist_id' => $this->t('Artist identifier'),
+      'id' => $this->t('DRAM identifier')
     ];
     return $fields;
   }
@@ -68,9 +69,19 @@ class Track extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('performer_ids', $performer_ids);
 
+    $composer_ids = $this->select('artist_item', 'ai')
+      ->fields('ai', ['artist_id'])
+      ->condition('ai.item_id', $track_ids)
+      ->condition('function_id', '4')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('composer_ids', $composer_ids);
+
     // var_dump($ensembles);
     var_dump($performer_ids);
     var_dump($ensembles);
+
+    return parent::prepareRow($row);
 
   }
 
