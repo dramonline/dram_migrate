@@ -28,6 +28,7 @@ process:
   field_dram_id: id
   field_legacy_id: legacy_id
   field_active: active
+  field_ensemble_type: type
   pseudo_link:
     plugin: concat
     source:
