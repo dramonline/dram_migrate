@@ -18,7 +18,7 @@ class Track extends SqlBase {
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('track_test', 't')
+    $query = $this->select('track', 't')
       ->fields('t', [
         'id',
         'legacy_id',

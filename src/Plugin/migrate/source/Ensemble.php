@@ -17,7 +17,7 @@ class Ensemble extends SqlBase {
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('ensemble_test', 'e')
+    $query = $this->select('ensemble', 'e')
       ->fields('e', [
         'id',
         'legacy_id',
@@ -25,7 +25,7 @@ class Ensemble extends SqlBase {
         'name',
         'active',
         'type'
-      ]);
+      ])->orderBy('name');
 
     return $query;
   }

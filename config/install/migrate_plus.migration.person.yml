@@ -7,7 +7,12 @@ source:
   plugin: person
   track_changes: true
   constants:
-    NWR_URL: "http://dramonline.org/person"
+    NWR_URL: "http://dramonline.org/albums"
+    APPEND_DATE: "-01-01"
+  ids:
+    id:
+      type: integer
+  batch_size: 1000
 
 # Process plugin
 process:
@@ -21,7 +26,6 @@ process:
   field_legacy_id: legacy_id
   field_active: active
   field_person_name/given: artist_fname
-  field_person_name/middle: artist_mname
   field_person_name/family: artist_lname
   field_person_name/title: artist_prefix
   field_person_name/generational: artist_suffix
@@ -33,6 +37,19 @@ process:
     delimiter: "/"
   "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
+
+  pseudo_date_start:
+    plugin: concat
+    source:
+      - date_start
+      - constants/APPEND_DATE
+  pseudo_date_end:
+    plugin: concat
+    source:
+      - date_end
+      - constants/APPEND_DATE
+  field_date_range_active/value: "@pseudo_date_start"
+  field_date_range_active/end_value: "@pseudo_date_end"
 
 # Destination plugin
 destination:

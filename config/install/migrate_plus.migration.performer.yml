@@ -32,6 +32,7 @@ process:
       source: function_id
   field_description: ancillary
 
+
 # Destination plugin
 destination:
   plugin: "entity_reference_revisions:paragraph"

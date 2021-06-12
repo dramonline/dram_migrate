@@ -18,7 +18,7 @@ class Release extends SqlBase {
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('album_test', 'a')
+    $query = $this->select('album', 'a')
       ->fields('a', [
         'id',
         'legacy_id',
@@ -74,11 +74,11 @@ class Release extends SqlBase {
   public function prepareRow(Row $row) {
     $release_ids = $row->getSourceProperty('id');
 
-    $track_ids = $this->select('track_test', 'tt')
-      ->fields('tt', ['id'])
-      ->condition('tt.album_id', $release_ids)
-      ->orderBy('tt.disc_number')
-      ->orderBy('tt.disc_track_number')
+    $track_ids = $this->select('track', 't')
+      ->fields('t', ['id'])
+      ->condition('t.album_id', $release_ids)
+      ->orderBy('t.disc_number')
+      ->orderBy('t.disc_track_number')
       ->execute()
       ->fetchCol();
 

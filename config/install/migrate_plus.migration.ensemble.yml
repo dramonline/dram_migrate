@@ -28,7 +28,14 @@ process:
   field_dram_id: id
   field_legacy_id: legacy_id
   field_active: active
-  field_ensemble_type: type
+  field_ensemble_type:
+    source: type
+    plugin: entity_lookup
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: ensemble_type
+    value_key: name
+    ignore_case: true
   pseudo_link:
     plugin: concat
     source:

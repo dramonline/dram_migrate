@@ -18,7 +18,7 @@ class Performer extends SqlBase {
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('artist_item', 'ai')
+    $query = $this->select('artist', 'ai')
       ->fields('ai', [
         'id',
         'artist_id',

@@ -2,7 +2,6 @@
 
 namespace Drupal\dram_migrate\Plugin\migrate\source;
 
-use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 
 /**
@@ -19,22 +18,20 @@ class Person extends SqlBase {
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('person_test', 'p')
+    $query = $this->select('person', 'p')
       ->fields('p', [
         'id',
         'legacy_id',
         'url_code',
-        'name',
-        'artist_fname',
-        'artist_mname',
-        'artist_lname',
         'display_name',
+        'artist_fname',
+        'artist_lname',
         'artist_suffix',
         'artist_prefix',
-        'active_dates',
-        'biography',
-        'active'
-      ]);
+        'active',
+        'date_start',
+        'date_end',
+      ])->orderBy('artist_lname')->orderBy('artist_fname');
 
     return $query;
   }
@@ -48,15 +45,6 @@ class Person extends SqlBase {
     ];
     return $fields;
   }
-
-   /**
-   * {@inheritdoc}
-   */
-  public function prepareRow(Row $row) {
-    echo('foo');
-    return parent::prepareRow($row);
-  }
-
 
   /**
    * {@inheritdoc}

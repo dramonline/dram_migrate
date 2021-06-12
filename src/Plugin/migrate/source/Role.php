@@ -34,7 +34,6 @@ class Role extends SqlBase {
    */
   public function fields() {
     $fields = ['name' => $this->t('name')];
-
     return $fields;
   }
 
