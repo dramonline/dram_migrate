@@ -52,7 +52,9 @@ function dram_migrate_uninstall() {
     'performer',
     'instrument_hierarchy',
     'role',
-    'ensemble'
+    'ensemble',
+    'file',
+    'file_media',
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();

@@ -1,0 +1,59 @@
+# Migration metadata
+id: file_media
+label: file_media
+description: Migration from csv file to Drupal media entities
+
+source:
+  plugin: csv
+  track_changes: true
+  path: "/var/www/drupal/web/sites/default/files/migrations/liner-notes-file-migration.csv"
+  delimiter: ","
+  enclosure: '"'
+  header_offset: 0
+  constants:
+    DESTINATION: "public://notes"
+  ids: [id]
+
+# Process plugin
+process:
+  uid:
+    plugin: default_value
+    default_value: 2
+  fid: fid
+  mid: fid
+  filename: filename
+  filemime:
+    plugin: default_value
+    default_value: "application/pdf"
+
+  name: title
+  field_media_document/target_id:
+    plugin: migration_lookup
+    migration: file
+    source: fid
+  field_media_document/display:
+    plugin: default_value
+    default_value: 1
+  field_media_document/description: title
+  field_recording_label:
+    plugin: entity_lookup
+    entity_type: node
+    value_key: title
+    source: label_name
+  field_vendor_id: filename
+
+  pseudo_destination_path:
+    plugin: concat
+    source:
+      - constants/DESTINATION
+      - label_short_name
+      - filename
+    delimiter: /
+
+# Destination plugin
+destination:
+  plugin: entity:media
+  default_bundle: liner_notes
+  move: false
+
+migration_dependencies: {}
