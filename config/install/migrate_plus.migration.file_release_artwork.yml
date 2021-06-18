@@ -1,18 +1,13 @@
 # Migration metadata
-id: file
-label: file
-description: Migration from csv file to Drupal files
+id: file_release_artwork
+label: file_release_artwork
 
 source:
-  plugin: csv
+  plugin: file_release_artwork
   track_changes: true
-  path: "/var/www/drupal/web/sites/default/files/migrations/liner-notes-file-migration.csv"
-  delimiter: ","
-  enclosure: '"'
-  header_offset: 0
   constants:
-    SOURCE: "https://gaburo.s3.amazonaws.com/dram/public/notes-staging"
-    DESTINATION: "public://notes"
+    SOURCE: "https://gaburo.s3.amazonaws.com/dram/public/releases-staging"
+    DESTINATION: "public://releases"
   ids: [id]
 
 # Process plugin

@@ -26,17 +26,27 @@ process:
   field_dram_id: id
   field_legacy_id: legacy_id
   field_active: active
-  field_release_tracks:
-    plugin: migration_lookup
-    migration: track
-    source: release_tracks
+  # field_release_tracks:
+  #   plugin: migration_lookup
+  #   migration: track
+  #   source: release_tracks
+  # field_release_artwork:
+  #   plugin: entity_lookup
+  #   entity_type: node
+  #   value_key: title
+  #   source: label_name
+
   # field_streaming_approved: streaming_approved
   # field_deprecated: field_deprecated
   # field_digital: digital
-  # field_recording_label:
-  #   - plugin: migration_lookup
-  #     migration: label
-  #     source: label_id
+  field_recording_label:
+    plugin: migration_lookup
+    migration: label
+    source: label_id
+  field_media_liner_notes:
+    plugin: migration_lookup
+    migration: file_media_liner_notes
+    source: file_id
   # field_copyright_agent:
   #   - plugin: migration_lookup
   #     migration: label
@@ -47,7 +57,7 @@ process:
   #     migration: label
   #     source: label_id
   #     no_stub: true
-  # field_vendor_id: vendor_id
+  field_vendor_id: vendor_id
   # field_oclc_id: oclc_id
   # field_upc_id: upc_id
   # "field_legacy_url/uri": "@pseudo_link"

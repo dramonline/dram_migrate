@@ -30,7 +30,7 @@ class Release extends SqlBase {
         // 'streaming_approved',
         // 'deprecated',
         // 'digital',
-        // 'vendor_id',
+        'vendor_id',
         // 'upc_id',
         // 'oclc_id',
         // 'composition_start',
@@ -39,8 +39,10 @@ class Release extends SqlBase {
         // 'recording_start',
         // 'recording_end',
         // 'recording_circa'
-      ]);
+      ])->condition('a.id', '979070');
+      // ]);
       $query->leftJoin('copyright','c','a.id = c.item_id');
+      $query->leftJoin('file_liner_notes', 'f', 'a.id = f.release_id');
       // $query->join('note','n','a.id = n.item_id');
       $query->fields('c', [
         'item_id',
@@ -81,8 +83,14 @@ class Release extends SqlBase {
       ->orderBy('t.disc_track_number')
       ->execute()
       ->fetchCol();
-
     $row->setSourceProperty('release_tracks', $track_ids);
+
+    $file_id = $this->select('file_liner_notes', 'f')
+      ->fields('f', ['fid'])
+      ->condition('f.release_id', $release_ids)
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('file_id', $file_id);
 
     return parent::prepareRow($row);
 

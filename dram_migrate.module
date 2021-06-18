@@ -55,6 +55,10 @@ function dram_migrate_uninstall() {
     'ensemble',
     'file',
     'file_media',
+    'file_liner_notes',
+    'file_media_liner_notes',
+    'file_release_artwork',
+    'file_media_release_artwork'
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
