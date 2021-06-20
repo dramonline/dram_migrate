@@ -19,7 +19,7 @@ process:
   filename: filename
   filemime:
     plugin: default_value
-    default_value: "application/pdf"
+    default_value: "image/jpeg"
 
   pseudo_source_path:
     plugin: concat

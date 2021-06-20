@@ -8,16 +8,17 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
  * Minimalistic example for a SqlBase source plugin.
  *
  * @MigrateSource(
- *   id = "file_media_liner_notes"
+ *   id = "file_media_release_artwork"
  * )
  */
-class FileMediaLinerNotes extends SqlBase {
+class FileMediaReleaseArtwork extends SqlBase {
+
 
   /**
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('file_liner_notes', 'f')
+    $query = $this->select('file_release_artwork', 'f')
       ->fields('f', [
         'id',
         'fid',
@@ -27,8 +28,7 @@ class FileMediaLinerNotes extends SqlBase {
         'catalog_number',
         'title',
         'label_short_name',
-        'label_name',
-        'media_type'
+        'label_name,'
       ])->orderBy('label_name')->orderBy('catalog_number');
 
     return $query;
