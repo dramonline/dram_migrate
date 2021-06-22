@@ -18,7 +18,7 @@ class Performer extends SqlBase {
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('artist', 'ai')
+    $query = $this->select('artist_item', 'ai')
       ->fields('ai', [
         'id',
         'artist_id',
@@ -27,9 +27,10 @@ class Performer extends SqlBase {
         'item_id',
         'item_table',
         'ancillary'
-      ])
-      // ->condition('item_table', 'track', '=')
-      ->orderBy('id','ASC');
+      ]);
+    $query->innerJoin('person', 'p', 'ai.artist_id = p.id');
+    $query->condition('item_table', 'track', '=')
+      ->orderBy('item_id','ASC')->orderBy('artist_id')->orderBy('p.artist_lname')->orderBy('p.artist_fname');
 
       return $query;
   }

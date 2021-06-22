@@ -31,7 +31,8 @@ class Person extends SqlBase {
         'active',
         'date_start',
         'date_end',
-      ])->orderBy('artist_lname')->orderBy('artist_fname');
+        'move'
+      ])->orderBy('artist_lname')->orderBy('artist_fname')->condition('move', '1');
 
     return $query;
   }

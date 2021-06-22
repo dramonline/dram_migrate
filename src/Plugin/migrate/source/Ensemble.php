@@ -24,8 +24,9 @@ class Ensemble extends SqlBase {
         'url_code',
         'name',
         'active',
-        'type'
-      ])->orderBy('name');
+        'type',
+        'moving'
+      ])->orderBy('name')->condition('moving', '1');
 
     return $query;
   }

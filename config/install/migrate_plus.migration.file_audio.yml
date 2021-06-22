@@ -1,0 +1,51 @@
+# Migration metadata
+id: file_audio
+label: file_audio
+
+source:
+  plugin: file_audio
+  track_changes: true
+  constants:
+    SOURCE: "https://gaburo.s3.amazonaws.com/dram/public/audio-staging"
+    DESTINATION: "public://audio"
+  ids: [id]
+
+# Process plugin
+process:
+  uid:
+    plugin: default_value
+    default_value: 2
+  fid: fid
+  filename: filename
+  filemime:
+    plugin: default_value
+    default_value: "audio/m4a"
+
+  pseudo_source_path:
+    plugin: concat
+    source:
+      - constants/SOURCE
+      - label_short_name
+      - filename
+    delimiter: /
+
+  pseudo_destination_path:
+    plugin: concat
+    source:
+      - constants/DESTINATION
+      - label_short_name
+      - filename
+    delimiter: /
+
+  uri:
+    plugin: file_copy
+    source:
+      - "@pseudo_source_path" # source
+      - "@pseudo_destination_path" # destination
+
+# Destination plugin
+destination:
+  plugin: entity:file
+  move: true
+
+migration_dependencies: {}

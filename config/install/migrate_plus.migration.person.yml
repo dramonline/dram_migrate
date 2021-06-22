@@ -27,6 +27,7 @@ process:
   field_active: active
   field_person_name/given: artist_fname
   field_person_name/family: artist_lname
+  field_person_name/middle: artist_mname
   field_person_name/title: artist_prefix
   field_person_name/generational: artist_suffix
   pseudo_link:
@@ -41,24 +42,7 @@ process:
   field_date_range_active/value: date_start
   field_date_range_active/end_value: date_end
 
-  # pseudo_date_start:
-  #   - source: date_start
-  #     plugin: skip_on_empty
-  #     method: process
-  #   - plugin: concat
-  #     source:
-  #       - date_start
-  #       - constants/APPEND_DATE
-  # pseudo_date_end:
-  #   - source: date_end
-  #     plugin: skip_on_empty
-  #     method: process
-  #   - plugin: concat
-  #     source:
-  #       - date_end
-  #       - constants/APPEND_DATE
-  # field_date_range_active/value: "@pseudo_date_start"
-  # field_date_range_active/end_value: "@pseudo_date_end"
+  field_moved: move
 
 # Destination plugin
 destination:

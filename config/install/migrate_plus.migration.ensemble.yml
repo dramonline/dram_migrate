@@ -45,4 +45,6 @@ process:
   "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
 
+  field_moved: moving
+
 migration_dependencies: {}
