@@ -23,13 +23,10 @@ class FileAudio extends SqlBase {
         'id',
         'fid',
         'mid',
-        'filename',
-        'release_id',
-        'catalog_number',
+        'code',
         'title',
-        'label_short_name',
-        'label_name,'
-      ])->orderBy('label_name')->orderBy('catalog_number');
+        'label_id',
+      ])->orderBy('label_id')->orderBy('code');
 
     return $query;
   }
@@ -43,6 +40,19 @@ class FileAudio extends SqlBase {
     ];
     return $fields;
   }
+
+  // /**
+  //  * {@inheritdoc}
+  //  */
+  // public function prepareRow(Row $row) {
+  //   $label_name = $row->getSourceProperty('label_id');
+
+  //   $foo = $this->select('file_audio', 'f')
+  //     ->fields('f', $label_name);
+  //   $foo->innerJoin('')
+
+  //   return parent::prepareRow($row);
+  //   }
 
   /**
    * {@inheritdoc}
