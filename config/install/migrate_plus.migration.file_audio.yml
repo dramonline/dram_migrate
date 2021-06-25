@@ -16,7 +16,6 @@ process:
     plugin: default_value
     default_value: 2
   fid: fid
-  filename: filename
   filemime:
     plugin: default_value
     default_value: "audio/m4a"
@@ -26,6 +25,7 @@ process:
     source:
       - constants/SOURCE
       - label_short_name
+      - catalog_number
       - filename
     delimiter: /
 
@@ -34,6 +34,7 @@ process:
     source:
       - constants/DESTINATION
       - label_short_name
+      - catalog_number
       - filename
     delimiter: /
 
@@ -46,6 +47,6 @@ process:
 # Destination plugin
 destination:
   plugin: entity:file
-  move: true
+  move: false
 
 migration_dependencies: {}

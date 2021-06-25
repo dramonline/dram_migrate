@@ -2,6 +2,7 @@
 
 namespace Drupal\dram_migrate\Plugin\migrate\source;
 
+use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 
 /**
@@ -25,8 +26,9 @@ class FileAudio extends SqlBase {
         'mid',
         'code',
         'title',
-        'label_id',
-      ])->orderBy('label_id')->orderBy('code');
+        'label_short_name',
+        'catalog_number'
+      ])->orderBy('label_id')->orderBy('catalog_number')->orderBy('disc_number')->orderBy('track_number');
 
     return $query;
   }
@@ -41,18 +43,29 @@ class FileAudio extends SqlBase {
     return $fields;
   }
 
-  // /**
-  //  * {@inheritdoc}
-  //  */
-  // public function prepareRow(Row $row) {
-  //   $label_name = $row->getSourceProperty('label_id');
+  /**
+   * {@inheritdoc}
+   */
+  public function prepareRow(Row $row) {
+    $code = $row->getSourceProperty('code');
+    $filename = $row->getSourceProperty('filepath');
+    $catalog_number = $row->getSourceProperty('catalog_number');
 
-  //   $foo = $this->select('file_audio', 'f')
-  //     ->fields('f', $label_name);
-  //   $foo->innerJoin('')
+    $code = strtolower($code);
+    $filename = strtolower($filename);
+    $catalog_number = strtolower($catalog_number);
 
-  //   return parent::prepareRow($row);
-  //   }
+    if (!empty($code)) {
+      $row->setSourceProperty('filename', $code . '.m4a');
+      } else {
+      $row->setSourceProperty('nothing', $code);
+    }
+
+    $row->setSourceProperty('catalog_number', $catalog_number);
+
+    return parent::prepareRow($row);
+
+  }
 
   /**
    * {@inheritdoc}
