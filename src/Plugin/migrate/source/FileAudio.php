@@ -27,8 +27,9 @@ class FileAudio extends SqlBase {
         'code',
         'title',
         'label_short_name',
-        'catalog_number'
-      ])->orderBy('label_id')->orderBy('catalog_number')->orderBy('disc_number')->orderBy('track_number');
+        'catalog_number',
+        'processed',
+      ])->condition('processed', '0')->orderBy('label_id')->orderBy('catalog_number')->orderBy('disc_number')->orderBy('track_number');
 
     return $query;
   }
