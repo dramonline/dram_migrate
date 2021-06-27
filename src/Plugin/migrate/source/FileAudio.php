@@ -29,7 +29,7 @@ class FileAudio extends SqlBase {
         'label_short_name',
         'catalog_number',
         'processed',
-      ])->condition('inactive', '1', '<>')->orderBy('label_id')->orderBy('catalog_number')->orderBy('disc_number')->orderBy('track_number');
+      ])->isNull('inactive')->orderBy('fid');
 
     return $query;
   }
