@@ -6,8 +6,8 @@ source:
   plugin: file_release_artwork
   track_changes: true
   constants:
-    SOURCE: "https://gaburo.s3.amazonaws.com/dram/public/releases-staging"
-    DESTINATION: "public://releases"
+    SOURCE: "https://gaburo.s3.amazonaws.com/dram/public/artwork-staging"
+    DESTINATION: "public://artwork"
   ids: [id]
 
 # Process plugin
