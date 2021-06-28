@@ -2,18 +2,16 @@
 
 namespace Drupal\dram_migrate\Plugin\migrate\source;
 
-use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 
 /**
  * Minimalistic example for a SqlBase source plugin.
  *
  * @MigrateSource(
- *   id = "file_audio"
+ *   id = "file_media_audio"
  * )
  */
-class FileAudio extends SqlBase {
-
+class FileMediaAudio extends SqlBase {
 
   /**
    * {@inheritdoc}
@@ -26,9 +24,9 @@ class FileAudio extends SqlBase {
         'mid',
         'code',
         'title',
+        'label_name',
         'label_short_name',
         'catalog_number',
-        'processed',
       ])->isNull('inactive')->orderBy('fid');
 
     return $query;
