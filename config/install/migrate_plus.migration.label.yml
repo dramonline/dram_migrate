@@ -38,5 +38,6 @@ process:
   "field_external_link/title": name
   "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
+  field_short_title: label_short_name
 
 migration_dependencies: {}

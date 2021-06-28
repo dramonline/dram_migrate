@@ -16,6 +16,7 @@ process:
     default_value: 2
   fid: fid
   mid: mid
+  field_dram_id: release_id
   filename: filename
   filemime:
     plugin: default_value
@@ -55,7 +56,7 @@ process:
 # Destination plugin
 destination:
   plugin: entity:media
-  default_bundle: document
+  default_bundle: liner_note
   move: false
 
 migration_dependencies: {}

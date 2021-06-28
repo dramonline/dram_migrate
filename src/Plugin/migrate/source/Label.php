@@ -24,7 +24,8 @@ class Label extends SqlBase {
         'name',
         'description',
         'home_page_url',
-        'url_code',
+	'url_code',
+	'label_short_name',
       ]);
     return $query;
   }
