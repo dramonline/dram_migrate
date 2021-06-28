@@ -26,7 +26,7 @@ process:
       - constants/SOURCE
       - label_short_name
       - catalog_number
-      - filename
+      - code
     delimiter: /
 
   pseudo_destination_path:
@@ -35,7 +35,7 @@ process:
       - constants/DESTINATION
       - label_short_name
       - catalog_number
-      - filename
+      - code
     delimiter: /
 
   uri:

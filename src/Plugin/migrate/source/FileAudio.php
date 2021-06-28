@@ -28,8 +28,7 @@ class FileAudio extends SqlBase {
         'title',
         'label_short_name',
         'catalog_number',
-        'processed',
-      ])->isNull('inactive')->orderBy('fid');
+      ])->orderBy('fid');
 
     return $query;
   }
