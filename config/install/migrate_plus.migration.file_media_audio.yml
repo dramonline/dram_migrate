@@ -5,7 +5,7 @@ label: file_media_audio
 source:
   plugin: file_media_audio
   track_changes: true
-  ids: [fid]
+  ids: [id]
 
 # Process plugin
 process:
