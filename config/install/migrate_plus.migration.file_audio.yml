@@ -18,7 +18,7 @@ process:
   fid: fid
   filemime:
     plugin: default_value
-    default_value: "audio/m4a"
+    default_value: "audio/mp4"
 
   pseudo_source_path:
     plugin: concat
