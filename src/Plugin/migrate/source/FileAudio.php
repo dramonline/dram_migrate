@@ -26,6 +26,7 @@ class FileAudio extends SqlBase {
         'mid',
         'code',
         'title',
+        'filename',
         'label_short_name',
         'catalog_number',
       ])->orderBy('fid');
