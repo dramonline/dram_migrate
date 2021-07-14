@@ -3,6 +3,7 @@ id: file_liner_notes
 label: file_liner_notes
 
 source:
+  batch_size: 100
   plugin: file_liner_notes
   track_changes: true
   constants:

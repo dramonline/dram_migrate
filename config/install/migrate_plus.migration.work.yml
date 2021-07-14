@@ -7,7 +7,7 @@ source:
   plugin: work
   track_changes: true
   constants:
-    NWR_URL: 'http://dramonline.org/works'
+    NWR_URL: "http://dramonline.org/works"
   ids:
     id:
       type: integer
@@ -18,9 +18,8 @@ process:
     plugin: default_value
     default_value: work
   uid:
-   -
-    plugin: default_value
-    default_value: 2
+    - plugin: default_value
+      default_value: 2
   title: title
   field_subtitle: display_subtitle
   field_dram_id: id
@@ -29,8 +28,7 @@ process:
   field_streaming_approved: field_streaming_approved
   field_deprecated: field_deprecated
   field_recording_label:
-    -
-      plugin: migration_lookup
+    - plugin: migration_lookup
       migration: label
       source: label_id
   pseudo_link:
@@ -38,8 +36,8 @@ process:
     source:
       - constants/NWR_URL
       - url_code
-    delimiter: '/'
-  "field_legacy_url/uri": '@pseudo_link'
+    delimiter: "/"
+  "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
   field_date_range_comp/value:
     plugin: format_date
@@ -63,6 +61,7 @@ process:
     to_format: "Y-m-d"
     source: recording_end
   field_date_range_record_circa: recording_cira
+  field_runtime: runtime
 
 # Destination plugin
 destination:

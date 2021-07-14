@@ -6,6 +6,8 @@ description: Migration from MYSQL tables to Drupal core entities
 source:
   plugin: track
   track_changes: true
+  constants:
+    NWR_URL: "http://dramonline.org/tracks"
   ids:
     id:
       type: integer
@@ -18,11 +20,54 @@ process:
   uid:
     plugin: default_value
     default_value: 2
-  title: title
   field_dram_id: id
   field_legacy_id: legacy_id
+  pseudo_link:
+    plugin: concat
+    source:
+      - constants/NWR_URL
+      - url_code
+    delimiter: "/"
+  "field_legacy_url/uri": "@pseudo_link"
+  "field_legacy_url/title": url_code
+  field_recording_label:
+    - plugin: migration_lookup
+      migration: label
+      source: label_id
+  field_related_work:
+    - plugin: migration_lookup
+      migration: work
+      source: work_id
+  field_track_number: track_number
+  title: title
+  field_subtitle: display_subtitle
+  field_runtime: runtime
+  field_date_range_comp/value:
+    plugin: format_date
+    from_format: "Y-m-d"
+    to_format: "Y-m-d"
+    source: composition_start
+  field_date_range_comp/end_value:
+    plugin: format_date
+    from_format: "Y-m-d"
+    to_format: "Y-m-d"
+    source: composition_end
+  field_date_range_comp_circa: composition_cira
+  field_date_range_record/value:
+    plugin: format_date
+    from_format: "Y-m-d"
+    to_format: "Y-m-d"
+    source: recording_start
+  field_date_range_record/end_value:
+    plugin: format_date
+    from_format: "Y-m-d"
+    to_format: "Y-m-d"
+    source: recording_end
+  field_date_range_record_circa: recording_cira
+  field_active: active
+  field_streaming_approved: streaming_approved
+  field_deprecated: deprecated
   field_disc_number: disc_number
-  field_track_number: disc_track_number
 
   field_ensemble:
     - plugin: migration_lookup

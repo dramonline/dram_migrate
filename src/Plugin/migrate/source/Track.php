@@ -22,18 +22,31 @@ class Track extends SqlBase {
       ->fields('t', [
         'id',
         'legacy_id',
+        'url_code',
+        'label_id',
+        'work_id',
+        'track_number',
         'title',
-        'disc_number',
-        'disc_track_number',
-      ]);
-      $query->leftJoin('artist_item','ai', 't.id = ai.item_id');
+        'display_subtitle',
+        'runtime',
+        'composition_start',
+        'composition_end',
+        'composition_circa',
+        'recording_start',
+        'recording_end',
+        'recording_circa',
+        'active',
+        'streaming_approved',
+        'disc_number'
+      ])->condition('label_id', '36398', '<>');
+      $query->join('artist_item','ai', 't.id = ai.item_id');
       $query->fields('ai', [
         'artist_id',
         'item_id',
         'function_id'
       ]);
 
-    return $query;
+      return $query;
   }
 
   /**
@@ -54,9 +67,9 @@ class Track extends SqlBase {
     $track_ids = $row->getSourceProperty('id');
 
     // entity reference, ensemble content type
-    $ensembles = $this->select('ensemble_item_test', 'eit')
-      ->fields('eit', ['artist_id'])
-      ->condition('eit.item_id', $track_ids)
+    $ensembles = $this->select('ensemble_item', 'ei')
+      ->fields('ei', ['artist_id'])
+      ->condition('ei.item_id', $track_ids)
       ->execute()
       ->fetchCol();
     $row->setSourceProperty('ensemble_ids', $ensembles);
@@ -78,8 +91,8 @@ class Track extends SqlBase {
     $row->setSourceProperty('composer_ids', $composer_ids);
 
     // var_dump($ensembles);
-    var_dump($performer_ids);
-    var_dump($ensembles);
+    // var_dump($performer_ids);
+    // var_dump($ensembles);
 
     return parent::prepareRow($row);
 

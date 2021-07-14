@@ -39,7 +39,7 @@ class Release extends SqlBase {
         // 'recording_start',
         // 'recording_end',
         // 'recording_circa'
-      ])->condition('a.id', '979070');
+      ]);
       // ]);
       $query->leftJoin('copyright','c','a.id = c.item_id');
       $query->leftJoin('file_liner_notes', 'f', 'a.id = f.release_id');

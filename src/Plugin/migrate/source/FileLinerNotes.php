@@ -2,6 +2,7 @@
 
 namespace Drupal\dram_migrate\Plugin\migrate\source;
 
+use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 
 /**
@@ -12,7 +13,6 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
  * )
  */
 class FileLinerNotes extends SqlBase {
-
 
   /**
    * {@inheritdoc}
@@ -42,6 +42,17 @@ class FileLinerNotes extends SqlBase {
       'id' => $this->t('DRAM identifier')
     ];
     return $fields;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function prepareRow(Row $row) {
+    $filename = $row->getSourceProperty('filename');
+    $filename = strtolower($filename);
+
+    $row->setSourceProperty('filename', $filename);
+      return parent::prepareRow($row);
   }
 
   /**

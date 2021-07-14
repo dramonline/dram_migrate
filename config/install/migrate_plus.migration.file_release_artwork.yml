@@ -9,6 +9,7 @@ source:
     SOURCE: "https://gaburo.s3.amazonaws.com/dram/public/artwork-staging"
     DESTINATION: "public://artwork"
   ids: [id]
+  batch_size: 100
 
 # Process plugin
 process:
