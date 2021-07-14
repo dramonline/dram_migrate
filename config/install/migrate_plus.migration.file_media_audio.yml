@@ -6,6 +6,7 @@ source:
   plugin: file_media_audio
   track_changes: true
   ids: [id]
+  batch_size: 100
 
 # Process plugin
 process:
