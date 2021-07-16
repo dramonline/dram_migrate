@@ -18,6 +18,7 @@ process:
       default_value: 2
   field_dram_id/value: id
   field_legacy_id: legacy_id
+  field_class/value: class
 
 # Destination plugin
 destination:

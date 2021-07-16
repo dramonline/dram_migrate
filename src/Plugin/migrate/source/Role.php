@@ -22,7 +22,8 @@ class Role extends SqlBase {
       ->fields('f', [
         'id',
         'legacy_id',
-        'name'
+        'name',
+        'class',
       ]
     )->orderBy('name','ASC');
 
