@@ -61,6 +61,11 @@ function dram_migrate_uninstall() {
     'file_media_release_artwork',
     'file_audio',
     'file_media_audio',
+    'tag',
+    'sa_article',
+    'sa_issue',
+    'sa_type',
+    'sa_term',
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();

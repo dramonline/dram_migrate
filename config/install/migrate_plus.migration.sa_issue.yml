@@ -1,0 +1,52 @@
+# Migration metadata
+id: sa_issue
+label: sa_issue
+description: Migration from JSON to Drupal core entities
+migration_group: "remote json"
+
+source:
+  track_changes: true
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - https://soundamerican.org//migrate/issues
+  item_selector: 0
+  fields:
+    -
+      name: src_nid
+      selector: /nid/0/value
+    -
+      name: src_title
+      selector: /title/0/value
+    -
+      name: src_short_title
+      selector: /field_issue_short_title/0/value
+    -
+      name: src_volume_number
+      selector: /field_issue_volume_number/0/value
+    -
+      name: src_publication_date
+      selector: /field_issue_publication_date/0/value
+  ids:
+    src_nid:
+      type: integer
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: issue
+  uid:
+    plugin: default_value
+    default_value: 2
+  title: src_title
+  field_short_title: src_short_title
+  field_vendor_id: src_volume_number
+  field_date_release: src_publication_date
+
+# Destination plugin
+destination:
+  plugin: entity:node
+
+migration_dependencies: {}

@@ -1,0 +1,42 @@
+# Migration metadata
+id: sa_type
+label: sa_type
+description: Migration from JSON to terms
+source_type: json
+migration_group: "remote json"
+
+source:
+  track_changes: true
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - https://soundamerican.org/migrate/types
+  item_selector: 0
+  fields:
+    -
+      name: src_tid
+      selector: /tid/0/value
+    -
+      name: src_name
+      selector: /name/0/value
+  ids:
+    src_tid:
+      type: integer
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: article
+  uid:
+    plugin: default_value
+    default_value: 2
+  name: src_name
+
+# Destination plugin
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: article_type
+
+migration_dependencies: {}
