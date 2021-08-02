@@ -1,0 +1,50 @@
+# Migration metadata
+id: sa_article_csv
+label: sa_article_csv
+description: Migration from CSV to Drupal core entities
+migration_tags: csv
+migration_group: csv
+
+source:
+  track_changes: true
+  plugin: csv
+  path: 'public://migrations/soundamerican-articles.csv'
+  delimiter: ','
+  enclosure: '"'
+  ids: [id]
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: article
+  uid:
+    plugin: default_value
+    default_value: 2
+  title: title
+  # field_author_override:
+  field_title_pre: pre_title
+  # field_date_release: src_field_article_publication_date
+  field_type:
+    -
+      plugin: entity_lookup
+      entity_type: taxonomy_term
+      value_key: name
+      bundle_key: vid
+      bundle: article_type
+      ignore_case: true
+      source: pre_title
+  field_author_primary:
+    -
+      plugin: entity_lookup
+      entity_type: node
+      value_key: title
+      bundle_key: type
+      bundle: person
+      ignore_case: true
+      source: author
+# Destination plugin
+destination:
+  plugin: entity:node
+
+migration_dependencies: {}
