@@ -40,6 +40,9 @@ source:
     -
       name: src_field_article_type
       selector: /field_article_type/0/target_id
+    -
+      name: src_field_article_primary_author
+      selector: /field_article_primary_author/0/target_id
 
   ids:
     src_nid:
@@ -65,7 +68,11 @@ process:
       plugin: migration_lookup
       migration: sa_type
       source: src_field_article_type
-
+  field_author_primary:
+    -
+      plugin: migration_lookup
+      migration: sa_person
+      source: src_field_article_primary_author
 
 # Destination plugin
 destination:

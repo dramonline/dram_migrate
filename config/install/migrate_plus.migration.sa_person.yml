@@ -1,0 +1,52 @@
+# Migration metadata
+id: sa_person
+label: sa_person
+description: Migration from JSON to Drupal core entities
+migration_group: "remote json"
+
+source:
+  track_changes: true
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - https://soundamerican.org/migrate/person
+  item_selector: 0
+  fields:
+    -
+      name: src_nid
+      selector: /nid/0/value
+    -
+      name: src_title
+      selector: /title/0/value
+    -
+      name: src_family
+      selector: /field_person_name/0/family
+    -
+      name: src_middle
+      selector: /field_person_name/0/middle
+    -
+      name: src_given
+      selector: /field_person_name/0/given
+  ids:
+    src_nid:
+      type: integer
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: person
+  uid:
+    plugin: default_value
+    default_value: 2
+  title: src_title
+  field_person_name/given: src_given
+  field_person_name/family: src_family
+  field_person_name/middle: src_middle
+
+# Destination plugin
+destination:
+  plugin: entity:node
+
+migration_dependencies: {}

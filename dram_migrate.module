@@ -66,6 +66,7 @@ function dram_migrate_uninstall() {
     'sa_issue',
     'sa_type',
     'sa_term',
+    'sa_person',
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
