@@ -10,7 +10,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - https://soundamerican.org//migrate/issues
+    - https://soundamerican.org/migrate/issues
   item_selector: 0
   fields:
     -
@@ -28,6 +28,9 @@ source:
     -
       name: src_publication_date
       selector: /field_issue_publication_date/0/value
+    -
+      name: src_related_articles
+      selector: /field_issue_rel_articles
   ids:
     src_nid:
       type: integer
@@ -44,6 +47,21 @@ process:
   field_short_title: src_short_title
   field_vendor_id: src_volume_number
   field_date_release: src_publication_date
+  # field_related_articles/target_id:
+  #   -
+  #     plugin: migration_lookup
+  #     migration: sa_article
+  #     source: src_related_articles
+
+  field_related_articles:
+    plugin: sub_process
+    source: src_related_articles
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: sa_article
+        source: target_id
+
 
 # Destination plugin
 destination:

@@ -1,0 +1,38 @@
+# Migration metadata
+id: sa_issue_csv
+label: sa_issue_csv
+description: Migration from CSV source to Drupal core entities
+migration_tags: csv
+migration_group: csv
+
+source:
+  track_changes: true
+  plugin: csv
+  path: 'public://migrations/soundamerican-schema-issues.csv'
+  delimiter: ','
+  enclosure: '"'
+  ids: [id]
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: issue
+  uid:
+    plugin: default_value
+    default_value: 2
+  title: title
+  field_short_title: short_title
+  field_vendor_id: volume_number
+  field_date_release/value:
+    -
+      plugin: format_date
+      source: publication_date
+      from_format: 'm/d/Y'
+      to_format: 'Y-m-d'
+
+# Destination plugin
+destination:
+  plugin: entity:node
+
+migration_dependencies: {}

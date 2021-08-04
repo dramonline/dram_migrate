@@ -1,6 +1,6 @@
 # Migration metadata
-id: sa_article
-label: sa_article
+id: sa_article_legacy
+label: sa_article_legacy
 description: Migration from JSON to Drupal core entities
 migration_group: "remote json"
 
@@ -10,7 +10,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - https://soundamerican.org//migrate/articles
+    - https://soundamerican.org/migrate/articles_legacy
   item_selector: 0
   fields:
     -
@@ -61,9 +61,6 @@ process:
   field_title_pre: src_field_article_pre_title
   field_date_release: src_field_article_publication_date
   field_type:
-    -
-      plugin: default_value
-      default_value: 181
     -
       plugin: migration_lookup
       migration: sa_type
