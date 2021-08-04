@@ -45,7 +45,7 @@ source:
       selector: /field_article_primary_author/0/target_id
     -
       name: src_field_article_page_section
-      selector: /field_article_page_section/0/target_id
+      selector: /field_article_page_section/1/target_id
   ids:
     src_nid:
       type: integer
@@ -62,14 +62,6 @@ process:
   field_author_override: src_field_article_author_override
   field_title_pre: src_field_article_pre_title
   field_date_release: src_field_article_publication_date
-  # field_type:
-  #   -
-  #     plugin: migration_lookup
-  #     migration: sa_type
-  #     source: src_field_article_type
-  #   -
-  #     plugin: default_value
-  #     default_value: 1249
   type_lookup:
     -
       plugin: migration_lookup
@@ -97,8 +89,6 @@ process:
     process:
       target_id: '0'
       target_revision_id: '1'
-
-
 
 # Destination plugin
 destination:

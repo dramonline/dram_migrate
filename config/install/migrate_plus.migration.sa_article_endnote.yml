@@ -1,6 +1,6 @@
 # Migration metadata
-id: sa_article_endnotes
-label: sa_article_endnotes
+id: sa_article_endnote
+label: sa_article_endnote
 description: Migration from JSON to Drupal paragraph entities
 migration_group: "remote json"
 
