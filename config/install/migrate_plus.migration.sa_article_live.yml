@@ -45,7 +45,11 @@ source:
       selector: /field_article_primary_author/0/target_id
     -
       name: src_field_article_page_section
+<<<<<<< HEAD
       selector: /field_article_page_section
+=======
+      selector: /field_article_page_section/1/target_id
+>>>>>>> a9accf93e1a54e46f134343c61b0afbdfd12e946
   ids:
     src_nid:
       type: integer

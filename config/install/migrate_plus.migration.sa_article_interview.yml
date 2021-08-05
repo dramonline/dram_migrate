@@ -1,0 +1,53 @@
+# Migration metadata
+id: sa_article_interview
+label: sa_article_interview
+description: Migration from JSON to Drupal paragraph entities
+migration_group: "remote json"
+
+source:
+  track_changes: true
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - https://soundamerican.org/migrate/interviews
+  item_selector: 0
+  fields:
+    -
+      name: src_id
+      selector: /id/0/value
+    -
+      name: src_type
+      selector: /type/0/target_id
+    -
+      name: src_section_title
+      selector: /field_section_title/0/value
+    -
+      name: src_body
+      selector: /field_body/0/value
+  ids:
+    src_id:
+      type: integer
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: interview
+  uid:
+    plugin: default_value
+    default_value: 2
+  field_title/value: src_section_title
+  field_title/format:
+    plugin: default_value
+    default_value: 'full_html'
+  field_body/value: src_body
+  field_body/format:
+    plugin: default_value
+    default_value: 'full_html'
+
+destination:
+  plugin: "entity_reference_revisions:paragraph"
+  default_bundle: interview
+
+migration_dependencies: {}
