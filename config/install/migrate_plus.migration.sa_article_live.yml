@@ -45,7 +45,7 @@ source:
       selector: /field_article_primary_author/0/target_id
     -
       name: src_field_article_page_section
-      selector: /field_article_page_section/0/target_id
+      selector: /field_article_page_section
   ids:
     src_nid:
       type: integer
@@ -62,14 +62,6 @@ process:
   field_author_override: src_field_article_author_override
   field_title_pre: src_field_article_pre_title
   field_date_release: src_field_article_publication_date
-  # field_type:
-  #   -
-  #     plugin: migration_lookup
-  #     migration: sa_type
-  #     source: src_field_article_type
-  #   -
-  #     plugin: default_value
-  #     default_value: 1249
   type_lookup:
     -
       plugin: migration_lookup
@@ -86,19 +78,38 @@ process:
       plugin: migration_lookup
       migration: sa_person
       source: src_field_article_primary_author
-  pseudo_fetch_page_section:
-    plugin: migration_lookup
-    migration: sa_article_page_section
-    source: src_field_article_page_section
+  # pseudo_fetch_page_section:
+  #   plugin: sub_process
+  #   source: src_field_article_page_section
+  #   process:
+  #     ids:
+  #       plugin: migration_lookup
+  #       migration: sa_article_page_section
+  #       source: target_id
+  # field_page_section:
+  #   plugin: sub_process
+  #   source:
+  #     - '@pseudo_fetch_page_section'
+  #   process:
+  #     target_id: '0'
+  #     target_revision_id: '1'
   field_page_section:
     plugin: sub_process
-    source:
-      - '@pseudo_fetch_page_section'
     process:
-      target_id: '0'
-      target_revision_id: '1'
-
-
+      ids:
+        plugin: migration_lookup
+        migration: sa_article_page_section
+        source: target_id
+      target_id:
+        plugin: extract
+        source: '@ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@ids'
+        index:
+          - 1
 
 # Destination plugin
 destination:
