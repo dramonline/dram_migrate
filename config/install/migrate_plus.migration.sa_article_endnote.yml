@@ -10,7 +10,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - https://soundamerican.org/migrate/endnotes
+    - http://staging.soundamerican.org/migrate/endnotes
   item_selector: 0
   fields:
     -
@@ -30,7 +30,7 @@ source:
 process:
   type:
     plugin: default_value
-    default_value: endnotes
+    default_value: endnote
   uid:
     plugin: default_value
     default_value: 2
@@ -41,6 +41,5 @@ process:
 
 destination:
   plugin: "entity_reference_revisions:paragraph"
-  default_bundle: page_section
 
 migration_dependencies: {}

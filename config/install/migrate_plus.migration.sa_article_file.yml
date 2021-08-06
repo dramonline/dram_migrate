@@ -1,7 +1,7 @@
 # Migration metadata
-id: sa_article_legacy
-label: sa_article_legacy
-description: Migration from JSON to Drupal core entities
+id: sa_article_file
+label: sa_article_file
+description: Migration from JSON to managed files
 migration_group: "remote json"
 
 source:
@@ -10,7 +10,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - http://staging.soundamerican.org/migrate/articles_legacy
+    - https://soundamerican.org/migrate/files
   item_selector: 0
   fields:
     -
@@ -43,7 +43,9 @@ source:
     -
       name: src_field_article_primary_author
       selector: /field_article_primary_author/0/target_id
-
+    -
+      name: src_field_article_page_section
+      selector: /field_article_page_section
   ids:
     src_nid:
       type: integer
@@ -60,16 +62,50 @@ process:
   field_author_override: src_field_article_author_override
   field_title_pre: src_field_article_pre_title
   field_date_release: src_field_article_publication_date
-  field_type:
+  type_lookup:
     -
       plugin: migration_lookup
-      migration: sa_type
       source: src_field_article_type
+      migration:
+        - sa_type
+  field_type:
+    -
+      plugin: default_value
+      source: '@type_lookup'
+      default_value: 1249
   field_author_primary:
     -
       plugin: migration_lookup
       migration: sa_person
       source: src_field_article_primary_author
+  field_page_section:
+    plugin: sub_process
+    source: src_field_article_page_section
+    process:
+      ids:
+        plugin: migration_lookup
+        migration:
+          - sa_article_page_section
+          - sa_article_endnote
+          - sa_article_interview
+        source_ids:
+          sa_article_page_section:
+            - target_id
+          sa_article_endnote:
+            - target_id
+          sa_article_interview:
+            - target_id
+        stub_id: sa_article_page_section
+      target_id:
+        plugin: extract
+        source: '@ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@ids'
+        index:
+          - 1
 
 # Destination plugin
 destination:

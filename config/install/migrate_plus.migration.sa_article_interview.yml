@@ -10,7 +10,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - https://soundamerican.org/migrate/interviews
+    - http://staging.soundamerican.org/migrate/interviews
   item_selector: 0
   fields:
     -
@@ -48,6 +48,5 @@ process:
 
 destination:
   plugin: "entity_reference_revisions:paragraph"
-  default_bundle: interview
 
 migration_dependencies: {}
