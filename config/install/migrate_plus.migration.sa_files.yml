@@ -1,0 +1,53 @@
+# Migration metadata
+id: sa_files
+label: sa_files
+description: Migration from JSON to managed files
+migration_group: "remote json"
+
+source:
+  track_changes: true
+  plugin: csv
+  path: 'public://migrations/sa-files.csv'
+  delimiter: ','
+  enclosure: '"'
+  ids: [fid]
+
+  constants:
+    SOURCE: "https://gaburo.s3.amazonaws.com/dram/public/sa-file-staging"
+    DESTINATION: "public:/"
+
+# Process plugin
+process:
+  uid:
+    plugin: default_value
+    default_value: 2
+  fid: fid
+  filemime: mimetype
+
+  pseudo_source_path:
+    plugin: concat
+    source:
+      - constants/SOURCE
+      - filename
+    delimiter: /
+
+  pseudo_destination_path:
+    plugin: concat
+    source:
+      - constants/DESTINATION
+      - type
+      - filename
+    delimiter: /
+
+  uri:
+    plugin: file_copy
+    source:
+      - "@pseudo_source_path" # source
+      - "@pseudo_destination_path" # destination
+
+# Destination plugin
+destination:
+  plugin: entity:file
+  move: false
+
+migration_dependencies: {}

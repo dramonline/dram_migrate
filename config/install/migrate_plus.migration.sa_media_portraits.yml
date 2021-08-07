@@ -1,0 +1,34 @@
+id: sa_media_portraits
+label: sa_media_portraits
+
+source:
+  plugin: sa_media_portraits
+  track_changes: true
+  plugin: csv
+  path: 'public://migrations/sa-media-portraits.csv'
+  delimiter: ','
+  enclosure: '"'
+  ids: [mid]
+
+process:
+  uid:
+    plugin: default_value
+    default_value: 2
+  fid: fid
+  mid: fid
+  name: name
+  field_legacy_id: mid
+  field_media_image/target_id:
+    plugin: migration_lookup
+    migration: sa_files
+    source: fid
+  field_media_image/alt: name
+  field_caption_short: caption
+  field_credit: credit
+
+destination:
+  plugin: entity:media
+  default_bundle: portrait
+  move: false
+
+migration_dependencies: {}
