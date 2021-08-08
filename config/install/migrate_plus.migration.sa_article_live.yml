@@ -83,34 +83,33 @@ process:
       plugin: skip_on_empty
       method: row
       source: field_name
-
-    plugin: sub_process
-    source: src_field_article_page_section
-    process:
-      ids:
-        plugin: migration_lookup
-        migration:
-          - sa_article_page_section
-          - sa_article_endnote
-          - sa_article_interview
-        source_ids:
-          sa_article_page_section:
-            - target_id
-          sa_article_endnote:
-            - target_id
-          sa_article_interview:
-            - target_id
-        stub_id: sa_article_page_section
-      target_id:
-        plugin: extract
-        source: '@ids'
-        index:
-          - 0
-      target_revision_id:
-        plugin: extract
-        source: '@ids'
-        index:
-          - 1
+    -
+      plugin: sub_process
+      source: src_field_article_page_section
+      process:
+        ids:
+          plugin: migration_lookup
+          migration:
+            - sa_article_page_section
+            - sa_article_endnote
+            - sa_article_interview
+          source_ids:
+            sa_article_page_section:
+              - target_id
+            sa_article_endnote:
+              - target_id
+            sa_article_interview:
+              - target_id
+        target_id:
+          plugin: extract
+          source: '@ids'
+          index:
+            - 0
+        target_revision_id:
+          plugin: extract
+          source: '@ids'
+          index:
+            - 1
 
 # Destination plugin
 destination:
