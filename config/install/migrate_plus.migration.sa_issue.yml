@@ -10,7 +10,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - https://soundamerican.org/migrate/issues
+    - https://www.soundamerican.org/migrate/issues
   item_selector: 0
   fields:
     -

@@ -10,7 +10,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - http://staging.soundamerican.org/migrate/interviews
+    - https://www.soundamerican.org/migrate/interviews
   item_selector: 0
   fields:
     -

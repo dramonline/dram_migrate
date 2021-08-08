@@ -1,8 +1,8 @@
 # Migration metadata
 id: sa_files
 label: sa_files
-description: Migration from JSON to managed files
-migration_group: "remote json"
+description: Migration from CSV to managed files
+migration_group: "sa media"
 
 source:
   track_changes: true
@@ -10,7 +10,7 @@ source:
   path: 'public://migrations/sa-files.csv'
   delimiter: ','
   enclosure: '"'
-  ids: [fid]
+  ids: [sa_mid]
 
   constants:
     SOURCE: "https://gaburo.s3.amazonaws.com/dram/public/sa-file-staging"
@@ -21,7 +21,7 @@ process:
   uid:
     plugin: default_value
     default_value: 2
-  fid: fid
+  fid: sa_mid
   filemime: mimetype
 
   pseudo_source_path:

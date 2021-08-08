@@ -10,7 +10,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - http://staging.soundamerican.org/migrate/articles_live
+    - https://soundamerican.org/migrate/articles_live
   item_selector: 0
   fields:
     -
@@ -79,6 +79,11 @@ process:
       migration: sa_person
       source: src_field_article_primary_author
   field_page_section:
+    -
+      plugin: skip_on_empty
+      method: row
+      source: field_name
+
     plugin: sub_process
     source: src_field_article_page_section
     process:

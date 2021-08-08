@@ -1,8 +1,8 @@
 # Migration metadata
 id: sa_article_media
-label: sa_article+_media
-description: Migration from JSON to Drupal paragraph entities
-migration_group: "remote json"
+label: sa_article_media
+description: Migration from CSV to paragraph entities
+migration_group: "sa media"
 
 source:
   track_changes: true
@@ -10,18 +10,15 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - http://staging.soundamerican.org/migrate/endnotes
+    - https://www.soundamerican.org/migrate/media
   item_selector: 0
   fields:
     -
       name: src_id
       selector: /id/0/value
     -
-      name: src_type
-      selector: /type/0/target_id
-    -
-      name: src_body
-      selector: /field_body/0/value
+      name: src_media
+      selector: /field_media/0/target_id
   ids:
     src_id:
       type: integer
@@ -30,14 +27,21 @@ source:
 process:
   type:
     plugin: default_value
-    default_value: endnote
+    default_value: media
   uid:
     plugin: default_value
     default_value: 2
-  field_body/value: src_body
-  field_body/format:
-    plugin: default_value
-    default_value: 'full_html'
+  field_media:
+    plugin: migration_lookup
+    source: src_media
+    migration:
+      - sa_media_articles
+      - sa_media_portraits
+    source_ids:
+      sa_media_articles:
+        - target_id
+      sa_media_portraits:
+        - target_id
 
 destination:
   plugin: "entity_reference_revisions:paragraph"
