@@ -72,17 +72,13 @@ process:
     -
       plugin: default_value
       source: '@type_lookup'
-      default_value: 1249
+      default_value: 1329
   field_author_primary:
     -
       plugin: migration_lookup
       migration: sa_person
       source: src_field_article_primary_author
   field_page_section:
-    -
-      plugin: skip_on_empty
-      method: row
-      source: field_name
     -
       plugin: sub_process
       source: src_field_article_page_section
