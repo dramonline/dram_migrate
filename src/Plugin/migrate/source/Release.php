@@ -39,16 +39,16 @@ class Release extends SqlBase {
         // 'recording_start',
         // 'recording_end',
         // 'recording_circa'
-      ]);
+      ])->condition('id','386008');;
       // ]);
-      $query->leftJoin('copyright','c','a.id = c.item_id');
-      $query->leftJoin('file_liner_notes', 'f', 'a.id = f.release_id');
+      // $query->leftJoin('copyright','c','a.id = c.item_id');
+      // $query->leftJoin('file_liner_notes', 'f', 'a.id = f.release_id');
       // $query->join('note','n','a.id = n.item_id');
-      $query->fields('c', [
-        'item_id',
-        'c_line',
-        'p_line',
-      ]);
+      // $query->fields('c', [
+      //   'item_id',
+      //   'c_line',
+      //   'p_line',
+      // ])
       // $query->leftJoin('track_test', 'tt', 'a.id = tt.album_id');
       // $query->orderBy('tt.disc_track_number');
 
@@ -85,12 +85,12 @@ class Release extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('release_tracks', $track_ids);
 
-    $file_id = $this->select('file_liner_notes', 'f')
-      ->fields('f', ['fid'])
-      ->condition('f.release_id', $release_ids)
-      ->execute()
-      ->fetchCol();
-    $row->setSourceProperty('file_id', $file_id);
+    // $file_id = $this->select('file_liner_notes', 'f')
+    //   ->fields('f', ['fid'])
+    //   ->condition('f.release_id', $release_ids)
+    //   ->execute()
+    //   ->fetchCol();
+    // $row->setSourceProperty('file_id', $file_id);
 
     return parent::prepareRow($row);
 

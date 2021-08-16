@@ -49,7 +49,7 @@ process:
     from_format: "Y-m-d"
     to_format: "Y-m-d"
     source: composition_end
-  field_date_range_comp_circa: composition_cira
+  field_date_range_comp_circa: composition_circa
   field_date_range_record/value:
     plugin: format_date
     from_format: "Y-m-d"
@@ -60,8 +60,9 @@ process:
     from_format: "Y-m-d"
     to_format: "Y-m-d"
     source: recording_end
-  field_date_range_record_circa: recording_cira
+  field_date_range_record_circa: recording_circa
   field_runtime: runtime
+  field_track_number: work_number
 
 # Destination plugin
 destination:

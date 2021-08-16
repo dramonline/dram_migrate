@@ -80,11 +80,12 @@ process:
       source: composer_ids
 
   field_personnel:
-    - plugin: migration_lookup
+    -
+      plugin: migration_lookup
       source: performer_ids
       migration: performer
-      no_stub: true
-    - plugin: sub_process
+    -
+      plugin: sub_process
       process:
         target_id: "0"
         target_revision_id: "1"
