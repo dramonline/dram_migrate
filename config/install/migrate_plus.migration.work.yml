@@ -25,8 +25,8 @@ process:
   field_dram_id: id
   field_legacy_id: legacy_id
   field_active: active
-  field_streaming_approved: field_streaming_approved
-  field_deprecated: field_deprecated
+  field_streaming_approved: streaming_approved
+  field_deprecated: deprecated
   field_recording_label:
     - plugin: migration_lookup
       migration: label
