@@ -1,11 +1,11 @@
 # Migration metadata
-id: performer
-label: performer
+id: composer
+label: composer
 description: Migration from MYSQL tables to Drupal paragraph entities.
 migration_group: "DRAM paragraphs"
 
 source:
-  plugin: performer
+  plugin: composer
   track_changes: true
   ids:
     id:
@@ -18,28 +18,20 @@ process:
       default_value: 2
   type:
     plugin: default_value
-    default_value: performer
+    default_value: composer
   field_person:
     - plugin: migration_lookup
       migration: person
       source: artist_id
-  field_instrument:
-    - plugin: skip_on_empty
-      method: process
-      source: instrument_id
-    - plugin: migration_lookup
-      migration: instrument
-      source: instrument_id
   field_role:
     - plugin: migration_lookup
       migration: role
       source: function_id
-  field_description: ancillary
   field_dram_id: id
 
 # Destination plugin
 destination:
   plugin: "entity_reference_revisions:paragraph"
-  default_bundle: performer
+  default_bundle: composer
 
 migration_dependencies: {}

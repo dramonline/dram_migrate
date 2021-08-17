@@ -38,7 +38,6 @@ process:
     - plugin: migration_lookup
       migration: work
       source: work_id
-  field_track_number: track_number
   title: title
   field_subtitle: display_subtitle
   field_runtime: runtime
@@ -52,7 +51,7 @@ process:
     from_format: "Y-m-d"
     to_format: "Y-m-d"
     source: composition_end
-  field_date_range_comp_circa: composition_cira
+  field_date_range_comp_circa: composition_circa
   field_date_range_record/value:
     plugin: format_date
     from_format: "Y-m-d"
@@ -63,10 +62,11 @@ process:
     from_format: "Y-m-d"
     to_format: "Y-m-d"
     source: recording_end
-  field_date_range_record_circa: recording_cira
+  field_date_range_record_circa: recording_circa
   field_active: active
   field_streaming_approved: streaming_approved
   field_deprecated: deprecated
+  field_track_number: track_number
   field_disc_number: disc_number
 
   field_ensemble:

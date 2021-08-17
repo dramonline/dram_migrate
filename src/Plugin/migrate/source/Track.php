@@ -39,12 +39,8 @@ class Track extends SqlBase {
         'active',
         'streaming_approved',
         'disc_number',
-      ])->condition('label_id', '36398', '<>')->condition('work_id','386174');
-      // $query->join('artist_item','ai', 't.id = ai.item_id');
-      // $query->fields('ai', [
-      //   'artist_id',
-      //   'item_id',
-      //   'function_id'
+        'disc_track_number',
+      ])->condition('label_id', '36398', '<>')->orderBy('label_id')->orderBy('album_id')->orderBy('disc_number')->orderBy('track_number');
 
       return $query;
   }
@@ -74,25 +70,24 @@ class Track extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('ensemble_ids', $ensembles);
 
+    $composers = [4, 1384, 3184, 89535];
     $composer_ids = $this->select('artist_item', 'ai')
       ->fields('ai', ['artist_id'])
       ->condition('ai.item_id', $track_ids)
-      ->condition('function_id', '4')
+      ->condition('function_id', $composers, 'IN')
       ->execute()
       ->fetchCol();
     $row->setSourceProperty('composer_ids', $composer_ids);
 
     // paragraphs, personnel
-    $performer_ids = $this->select('artist_item', 'ai')
-      ->fields('ai', ['id'])
-      ->condition('ai.item_id', $track_ids)
-      ->condition('function_id', '4', '<>')
-      ->execute()
-      ->fetchCol();
-    $row->setSourceProperty('performer_ids', $performer_ids);
+    // $performer_ids = $this->select('artist_item', 'ai')
+    //   ->fields('ai', ['id'])
+    //   ->condition('ai.item_id', $track_ids)
+    //   ->condition('function_id', '4', '<>')
+    //   ->execute()
+    //   ->fetchCol();
+    // $row->setSourceProperty('performer_ids', $performer_ids);
 
-    // var_dump($ensembles);
-    var_dump($performer_ids);
 
     return parent::prepareRow($row);
 

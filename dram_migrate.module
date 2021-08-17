@@ -81,6 +81,9 @@ function dram_migrate_uninstall() {
     'sa_media_portraits',
     'sa_media_articles',
     'sa_article_media',
+    'composer',
+    'production',
+    'librettist',
   ];
   foreach ($migrations as $migration) {
     Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
