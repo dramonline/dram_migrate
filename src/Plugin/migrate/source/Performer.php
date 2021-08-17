@@ -28,12 +28,13 @@ class Performer extends SqlBase {
         'item_table',
         'ancillary'
       ]);
+
+    $performer_ids = [7,12,44,232,254,283,312,315,318,379,460,626,1127,1140,1403,1450,1780,1970,2071,2780,5436,5517,13838,13853,13869,33167,33891,53989,61200,61243,95142,107090,353161,378953,381254,674171];
+
     $query->innerJoin('person', 'p', 'ai.artist_id = p.id');
     $query->innerJoin('track', 't', 't.id = ai.item_id');
-    $query->condition('function_id', '4', '<>');
+    $query->condition('function_id', $performer_ids, 'IN');
     $query->condition('item_table', 'track');
-    $item_ids = [386166, 386185, 386198];
-    $query->condition('item_id', $item_ids, 'IN'); // this is a track number
     $query->condition('t.label_id', '36398', '<>')->orderBy('item_id','ASC')->orderBy('p.artist_lname')->orderBy('p.artist_fname');
 
     return $query;
