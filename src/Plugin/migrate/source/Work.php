@@ -37,8 +37,7 @@ class Work extends SqlBase {
         'streaming_approved',
         'deprecated',
         'runtime'
-      ])->condition('album_id','386008');
-      // ->orderBy('label_id')->orderBy('album_id')->orderBy('work_number');
+      ])->condition('label_id', '36398', '<>')->orderBy('label_id')->orderBy('album_id')->orderBy('work_number');
     return $query;
   }
 

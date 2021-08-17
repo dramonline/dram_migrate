@@ -32,7 +32,8 @@ class Performer extends SqlBase {
     $query->innerJoin('track', 't', 't.id = ai.item_id');
     $query->condition('function_id', '4', '<>');
     $query->condition('item_table', 'track');
-    $query->condition('item_id','386166');
+    $item_ids = [386166, 386185, 386198];
+    $query->condition('item_id', $item_ids, 'IN'); // this is a track number
     $query->condition('t.label_id', '36398', '<>')->orderBy('item_id','ASC')->orderBy('p.artist_lname')->orderBy('p.artist_fname');
 
     return $query;
