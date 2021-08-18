@@ -122,7 +122,7 @@ class Track extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('audio_ids', $audio_ids);
 
-    var_dump($audio_ids);
+    // var_dump($audio_ids);
 
     return parent::prepareRow($row);
 
