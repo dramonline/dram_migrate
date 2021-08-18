@@ -122,6 +122,13 @@ class Track extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('audio_ids', $audio_ids);
 
+    $vendor_id = $this->select('file_audio', 'fa')
+      ->fields('fa', ['code'])
+      ->condition('fa.id', $track_ids)
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('vendor_id', $vendor_id);
+
     $isrc_id = $this->select('identifier', 'i')
       ->fields('i', ['code'])
       ->condition('i.item_id', $track_ids)->condition('i.type','isrc')

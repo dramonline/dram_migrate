@@ -40,6 +40,7 @@ process:
   field_legacy_id: legacy_id
   field_disc_number: disc_number
   field_track_number: track_number
+  field_vendor_id: vendor_id
 
   # Booleans
   field_date_range_comp_circa: composition_circa
