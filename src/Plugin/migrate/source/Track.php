@@ -106,14 +106,23 @@ class Track extends SqlBase {
     $row->setSourceProperty('personnel_ids', $personnel_ids);
 
     // paragraphs, personnel
-    $performers = [7,12,44,232,254,283,312,315,318,379,460,626,1127,1140,1403,1450,1780,1970,2071,2780,5436,5517,13838,13853,13869,33167,33891,53989,61200,61243,95142,107090,353161,378953,381254,674171];
+    $performers = [7,12,44,232,254,283,312,315,318,379,460,626,1127,1140,1403,1450,1780,1970,2071,2780,5436,5517,13838,13853,13869,33167,33891,53989,61200,61243,95142];
     $performer_ids = $this->select('artist_item', 'ai')
       ->fields('ai', ['id'])
       ->condition('ai.item_id', $track_ids)
-      ->condition('function_id', $performers)
+      ->condition('function_id', $performers, 'IN')
       ->execute()
       ->fetchCol();
     $row->setSourceProperty('performer_ids', $performer_ids);
+
+    $audio_ids = $this->select('file_audio', 'fa')
+      ->fields('fa', ['id'])
+      ->condition('fa.id', $track_ids)
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('audio_ids', $audio_ids);
+
+    var_dump($audio_ids);
 
     return parent::prepareRow($row);
 

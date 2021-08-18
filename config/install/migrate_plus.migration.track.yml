@@ -123,6 +123,12 @@ process:
         target_id: "0"
         target_revision_id: "1"
 
+  field_remote_audio:
+    -
+      plugin: migration_lookup
+      migration: file_media_audio
+      source: audio_ids
+
 # Destination plugin
 destination:
   plugin: entity:node
