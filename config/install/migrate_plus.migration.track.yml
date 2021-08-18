@@ -74,12 +74,45 @@ process:
       migration: ensemble
       source: ensemble_ids
 
-  field_composer:
+  field_composer_primary:
     - plugin: migration_lookup
       migration: person
-      source: composer_ids
+      source: composers_ids
 
-  field_personnel:
+  field_composer_attributed:
+    -
+      plugin: migration_lookup
+      migration: composer
+      source: composers_attributed_ids
+    -
+      plugin: sub_process
+      process:
+        target_id: "0"
+        target_revision_id: "1"
+
+  field_librettist:
+    -
+      plugin: migration_lookup
+      migration: librettist
+      source: librettists_ids
+    -
+      plugin: sub_process
+      process:
+        target_id: "0"
+        target_revision_id: "1"
+
+  field_production:
+    -
+      plugin: migration_lookup
+      source: personnel_ids
+      migration: production
+    -
+      plugin: sub_process
+      process:
+        target_id: "0"
+        target_revision_id: "1"
+
+  field_performer:
     -
       plugin: migration_lookup
       source: performer_ids
