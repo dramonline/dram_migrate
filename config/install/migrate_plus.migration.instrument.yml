@@ -1,7 +1,7 @@
 # Migration metadata
 id: instrument
 label: instrument
-migration_group: instrument_hierarchy
+migration_group: "Instrument hierarchy"
 description: Migration from MYSQL tables to Drupal core entities
 track_changes: true
 

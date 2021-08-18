@@ -1,7 +1,7 @@
 # Migration metadata
 id: category
 label: category
-migration_group: instrument_hierarchy
+migration_group: "Instrument hierarchy"
 description: Migration from MYSQL tables to Drupal core entities
 
 # Source plugin, id defined in the @MigrateSource annotation

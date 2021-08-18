@@ -1,6 +1,7 @@
 # Migration metadata
 id: file_liner_notes
 label: file_liner_notes
+migration_group: "DRAM files and media"
 
 source:
   batch_size: 100

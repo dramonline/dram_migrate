@@ -1,6 +1,7 @@
 # Migration metadata
 id: file_audio
 label: file_audio
+migration_group: "DRAM files and media"
 
 source:
   plugin: file_audio

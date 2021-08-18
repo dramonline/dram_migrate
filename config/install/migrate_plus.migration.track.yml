@@ -2,6 +2,7 @@
 id: track
 label: track
 description: Migration from MYSQL tables to Drupal core entities
+migration_group: "DRAM nodes"
 
 source:
   plugin: track
@@ -20,8 +21,6 @@ process:
   uid:
     plugin: default_value
     default_value: 2
-  field_dram_id: id
-  field_legacy_id: legacy_id
   pseudo_link:
     plugin: concat
     source:
@@ -30,17 +29,26 @@ process:
     delimiter: "/"
   "field_legacy_url/uri": "@pseudo_link"
   "field_legacy_url/title": url_code
-  field_recording_label:
-    - plugin: migration_lookup
-      migration: label
-      source: label_id
-  field_related_work:
-    - plugin: migration_lookup
-      migration: work
-      source: work_id
+
   title: title
   field_subtitle: display_subtitle
   field_runtime: runtime
+
+  # Identifiers
+  field_dram_id: id
+  field_isrc_id: isrc_ids
+  field_legacy_id: legacy_id
+  field_disc_number: disc_number
+  field_track_number: track_number
+
+  # Booleans
+  field_date_range_comp_circa: composition_circa
+  field_date_range_record_circa: recording_circa
+  field_active: active
+  field_streaming_approved: streaming_approved
+  field_deprecated: deprecated
+
+  # Dates
   field_date_range_comp/value:
     plugin: format_date
     from_format: "Y-m-d"
@@ -51,7 +59,6 @@ process:
     from_format: "Y-m-d"
     to_format: "Y-m-d"
     source: composition_end
-  field_date_range_comp_circa: composition_circa
   field_date_range_record/value:
     plugin: format_date
     from_format: "Y-m-d"
@@ -62,18 +69,22 @@ process:
     from_format: "Y-m-d"
     to_format: "Y-m-d"
     source: recording_end
-  field_date_range_record_circa: recording_circa
-  field_active: active
-  field_streaming_approved: streaming_approved
-  field_deprecated: deprecated
-  field_track_number: track_number
-  field_disc_number: disc_number
-
   field_ensemble:
     - plugin: migration_lookup
       migration: ensemble
       source: ensemble_ids
 
+  # Migration lookups, entity references
+  field_recording_label:
+    - plugin: migration_lookup
+      migration: label
+      source: label_id
+  field_related_work:
+    - plugin: migration_lookup
+      migration: work
+      source: work_id
+
+  # Migration lookups, paragraphs
   field_composer_primary:
     - plugin: migration_lookup
       migration: person
@@ -123,6 +134,7 @@ process:
         target_id: "0"
         target_revision_id: "1"
 
+  # Migration lookups, media
   field_remote_audio:
     -
       plugin: migration_lookup

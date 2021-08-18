@@ -2,6 +2,7 @@
 id: person
 label: person
 description: Migration from MYSQL tables to Drupal core entities
+migration_group: "DRAM nodes"
 
 source:
   plugin: person

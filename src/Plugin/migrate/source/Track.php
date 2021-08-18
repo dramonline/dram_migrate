@@ -122,7 +122,14 @@ class Track extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('audio_ids', $audio_ids);
 
-    // var_dump($audio_ids);
+    $isrc_id = $this->select('identifier', 'i')
+      ->fields('i', ['code'])
+      ->condition('i.item_id', $track_ids)->condition('i.type','isrc')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('isrc_ids', $isrc_id);
+
+    // var_dump($isrc_ids);
 
     return parent::prepareRow($row);
 

@@ -22,40 +22,24 @@ class Release extends SqlBase {
       ->fields('a', [
         'id',
         'legacy_id',
-        // 'url_code',
+        'url_code',
         'active',
         'title',
-        // 'display_subtitle',
+        'display_subtitle',
         'label_id',
-        // 'streaming_approved',
-        // 'deprecated',
-        // 'digital',
+        'streaming_approved',
+        'deprecated',
+        'digital',
         'vendor_id',
-        // 'upc_id',
-        // 'oclc_id',
-        // 'composition_start',
-        // 'composition_end',
-        // 'composition_circa',
-        // 'recording_start',
-        // 'recording_end',
-        // 'recording_circa'
-      ])->condition('id','386008');
-      // ]);
-      // $query->leftJoin('copyright','c','a.id = c.item_id');
-      // $query->leftJoin('file_liner_notes', 'f', 'a.id = f.release_id');
-      // $query->join('note','n','a.id = n.item_id');
-      // $query->fields('c', [
-      //   'item_id',
-      //   'c_line',
-      //   'p_line',
-      // ])
-      // $query->leftJoin('track_test', 'tt', 'a.id = tt.album_id');
-      // $query->orderBy('tt.disc_track_number');
-
-      // $query->fields('n', [
-      //   'type',
-      //   'data',
-      // ]);
+        'upc_id',
+        'oclc_id',
+        'composition_start',
+        'composition_end',
+        'composition_circa',
+        'recording_start',
+        'recording_end',
+        'recording_circa'
+      ]);
     return $query;
   }
 
@@ -85,12 +69,82 @@ class Release extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('release_tracks', $track_ids);
 
-    // $file_id = $this->select('file_liner_notes', 'f')
-    //   ->fields('f', ['fid'])
-    //   ->condition('f.release_id', $release_ids)
-    //   ->execute()
-    //   ->fetchCol();
-    // $row->setSourceProperty('file_id', $file_id);
+    $file_id = $this->select('file_liner_notes', 'ln')
+      ->fields('ln', ['mid'])
+      ->condition('ln.release_id', $release_ids)
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('file_id', $file_id);
+
+    $artwork_id = $this->select('file_release_artwork', 'aw')
+      ->fields('aw', ['mid'])
+      ->condition('aw.release_id', $release_ids)
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('artwork_id', $artwork_id);
+
+    $c_line = $this->select('copyright', 'c')
+      ->fields('c', ['c_line'])
+      ->condition('c.item_id', $release_ids)->condition('c.item_table','album')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('c_line', $c_line[0]);
+
+    $p_line = $this->select('copyright', 'c')
+      ->fields('c', ['p_line'])
+      ->condition('c.item_id', $release_ids)->condition('c.item_table','album')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('p_line', $p_line[0]);
+
+    $upc = $this->select('identifier', 'i')
+      ->fields('i', ['code'])
+      ->condition('i.item_id', $release_ids)->condition('i.item_table','upc')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('upc', $upc[0]);
+
+    $oclc = $this->select('identifier', 'i')
+      ->fields('i', ['code'])
+      ->condition('i.item_id', $release_ids)->condition('i.item_table','oclc')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('oclc', $oclc[0]);
+
+    $tags = $this->select('tag_item', 't')
+      ->fields('t', ['tag_id'])
+      ->condition('t.item_id', $release_ids)
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('tags', $tags);
+
+    $marc_500 = $this->select('note', 'n')
+      ->fields('n', ['data'])
+      ->condition('n.item_id', $release_ids)->condition('n.type','MARC500')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('marc_500', $marc_500);
+
+    $marc_511 = $this->select('note', 'n')
+      ->fields('n', ['data'])
+      ->condition('n.item_id', $release_ids)->condition('n.type','MARC511')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('marc_511', $marc_511);
+
+    $marc_518 = $this->select('note', 'n')
+      ->fields('n', ['data'])
+      ->condition('n.item_id', $release_ids)->condition('n.type','MARC518')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('marc_518', $marc_518);
+
+    $liner_text = $this->select('note', 'n')
+      ->fields('n', ['data'])
+      ->condition('n.item_id', $release_ids)->condition('n.type','liner')
+      ->execute()
+      ->fetchCol();
+    $row->setSourceProperty('liner_text', $liner_text);
 
     return parent::prepareRow($row);
 

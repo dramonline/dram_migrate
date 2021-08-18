@@ -1,6 +1,7 @@
 # Migration metadata
 id: file_media_release_artwork
 label: file_media_release_artwork
+migration_group: "DRAM files and media"
 
 source:
   plugin: file_media_release_artwork

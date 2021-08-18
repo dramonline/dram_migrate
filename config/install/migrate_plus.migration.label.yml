@@ -2,7 +2,7 @@
 id: label
 label: label
 description: Migration from MYSQL tables to Drupal core entities
-migration_group: nodes
+migration_group: "Instrument hierarchy"
 
 source:
   plugin: label
