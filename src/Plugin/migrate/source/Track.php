@@ -107,14 +107,34 @@ class Track extends SqlBase {
     $row->setSourceProperty('personnel_ids', $personnel_ids);
 
     // paragraphs, personnel
+    // $performers = [7,12,44,232,254,283,312,315,318,379,460,626,1127,1140,1403,1450,1780,1970,2071,2780,5436,5517,13838,13853,13869,33167,33891,53989,61200,61243,95142];
+    // $performer_ids = $this->select('artist_item', 'ai')
+    //   ->fields('ai', ['id'])
+    //   ->condition('ai.item_id', $track_ids)
+    //   ->condition('function_id', $performers, 'IN')
+    //   ->execute()
+    //   ->fetchCol();
+    // $row->setSourceProperty('performer_ids', $performer_ids);
+
     $performers = [7,12,44,232,254,283,312,315,318,379,460,626,1127,1140,1403,1450,1780,1970,2071,2780,5436,5517,13838,13853,13869,33167,33891,53989,61200,61243,95142];
     $performer_ids = $this->select('artist_item', 'ai')
       ->fields('ai', ['id'])
       ->condition('ai.item_id', $track_ids)
-      ->condition('function_id', $performers, 'IN')
-      ->execute()
+      ->condition('function_id', $performers, 'IN');
+    $performer_ids->join('person', 'p', 'ai.artist_id = p.id');
+    $performer_ids->orderBy('p.artist_lname')->orderBy('p.artist_fname');
+    $performer_ids = $performer_ids->execute()
       ->fetchCol();
     $row->setSourceProperty('performer_ids', $performer_ids);
+
+    // $tags = $this->select('tag_item', 't')
+    //   ->fields('t', ['tag_id'])
+    //   ->condition('t.item_id', $release_ids);
+    // $tags->join('tag', 'tg', 't.tag_id = tg.id');
+    // $tags->orderBy('tg.tag');
+    // $tags = $tags->execute()
+    //   ->fetchCol();
+    // $row->setSourceProperty('tags', $tags);
 
     $audio_ids = $this->select('file_audio', 'fa')
       ->fields('fa', ['id'])

@@ -114,8 +114,10 @@ class Release extends SqlBase {
 
     $tags = $this->select('tag_item', 't')
       ->fields('t', ['tag_id'])
-      ->condition('t.item_id', $release_ids)
-      ->execute()
+      ->condition('t.item_id', $release_ids);
+    $tags->join('tag', 'tg', 't.tag_id = tg.id');
+    $tags->orderBy('tg.tag');
+    $tags = $tags->execute()
       ->fetchCol();
     $row->setSourceProperty('tags', $tags);
 
