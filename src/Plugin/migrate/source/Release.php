@@ -38,7 +38,8 @@ class Release extends SqlBase {
         'composition_circa',
         'recording_start',
         'recording_end',
-        'recording_circa'
+        'recording_circa',
+        'runtime',
       ]);
     return $query;
   }

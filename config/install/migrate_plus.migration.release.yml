@@ -35,6 +35,7 @@ process:
 
   title: title
   field_subtitle: display_subtitle
+  field_runtime: runtime
 
   # Identifiers
   field_dram_id: id
@@ -107,6 +108,7 @@ process:
       migration: tag
       source: tags
 
+  # Notes fields
   field_note_bibliographic: marc_500
   field_note_date: marc_518
   field_note_liner: liner_text

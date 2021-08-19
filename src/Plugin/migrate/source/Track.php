@@ -40,6 +40,7 @@ class Track extends SqlBase {
         'streaming_approved',
         'disc_number',
         'disc_track_number',
+        'runtime',
       ])->condition('label_id', '36398', '<>')->orderBy('label_id')->orderBy('album_id')->orderBy('disc_number')->orderBy('track_number');
 
       return $query;
