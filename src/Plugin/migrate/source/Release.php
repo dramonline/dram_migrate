@@ -142,12 +142,12 @@ class Release extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('marc_518', $marc_518);
 
-    $liner_text = $this->select('note', 'n')
-      ->fields('n', ['data'])
-      ->condition('n.item_id', $release_ids)->condition('n.type','liner')
-      ->execute()
-      ->fetchCol();
-    $row->setSourceProperty('liner_text', $liner_text);
+    // $liner_text = $this->select('note', 'n')
+    //   ->fields('n', ['data'])
+    //   ->condition('n.item_id', $release_ids)->condition('n.type','liner')
+    //   ->execute()
+    //   ->fetchCol();
+    // $row->setSourceProperty('liner_text', $liner_text);
 
     return parent::prepareRow($row);
 

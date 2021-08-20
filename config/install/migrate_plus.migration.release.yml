@@ -111,7 +111,7 @@ process:
   # Notes fields
   field_note_bibliographic: marc_500
   field_note_date: marc_518
-  field_note_liner: liner_text
+  # field_note_liner: liner_text
   field_note_performer: marc_511
 
 # Destination plugin
