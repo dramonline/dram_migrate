@@ -40,7 +40,7 @@ class Release extends SqlBase {
         'recording_end',
         'recording_circa',
         'runtime',
-      ]);
+      ])->condition('label_id','36398','<>');
     return $query;
   }
 
