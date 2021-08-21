@@ -142,6 +142,17 @@ class Release extends SqlBase {
       ->fetchCol();
     $row->setSourceProperty('marc_518', $marc_518);
 
+    $composer_ids = $this->select('artist_item', 'ai')
+      ->fields('ai', ['artist_id'])
+      ->condition('ai.item_table','album')
+      ->condition('ai.function_id','4')
+      ->condition('ai.item_id', $release_ids);
+    $composer_ids->join('person', 'p', 'ai.artist_id = p.id');
+    $composer_ids->orderBy('p.artist_lname');
+    $composer_ids = $composer_ids->execute()
+      ->fetchCol();
+    $row->setSourceProperty('composer_ids', $composer_ids);
+
     // $liner_text = $this->select('note', 'n')
     //   ->fields('n', ['data'])
     //   ->condition('n.item_id', $release_ids)->condition('n.type','liner')
