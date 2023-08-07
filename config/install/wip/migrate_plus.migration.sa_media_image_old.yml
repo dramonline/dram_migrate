@@ -1,0 +1,33 @@
+id: sa_media_image_old
+label: sa_media_image_old
+
+source:
+  plugin: csv
+  track_changes: true
+  path: "/app/web/sites/default/files/migrations/sa_migrate_media_image.csv"
+  delimiter: ","
+  enclosure: '"'
+  ids: [mid]
+
+process:
+  uid:
+    plugin: default_value
+    default_value: 2
+  mid: mid
+  name: name
+  field_media_image/target_id:
+    plugin: migration_lookup
+    migration: sa_files
+    source: fid
+  field_media_image/alt: name
+  field_caption/value: field_media_image_caption_value
+  field_caption/format:
+    plugin: default_value
+    default_value: "formatted_title"
+
+destination:
+  plugin: entity:media
+  default_bundle: image
+  move: false
+
+migration_dependencies: {}

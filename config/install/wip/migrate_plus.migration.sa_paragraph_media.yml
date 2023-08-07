@@ -1,0 +1,50 @@
+# Migration metadata
+id: sa_paragraph_media
+label: sa_paragraph_media
+description: Migration from JSON to Drupal paragraph entities
+migration_group: "remote json"
+
+source:
+  track_changes: true
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - https://soundamerican.org/migrate/media
+  item_selector: 0
+  fields:
+    - name: src_id
+      selector: /id/0/value
+    - name: src_type
+      selector: /type/0/target_id
+
+  ids:
+    src_id:
+      type: integer
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: media
+  uid:
+    plugin: default_value
+    default_value: 2
+  field_media:
+    - plugin: default_value
+      source: src_id
+      migration:
+        - sa_media_file
+        - sa_media_image
+        - sa_media_portrait
+        - sa_media_soundcloud
+        - sa_media_video
+    - plugin: sub_process
+      process:
+        target_id: "0"
+        target_revision_id: "1"
+
+destination:
+  plugin: "entity_reference_revisions:paragraph"
+
+migration_dependencies: {}

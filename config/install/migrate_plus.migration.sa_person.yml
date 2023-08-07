@@ -13,20 +13,15 @@ source:
     - https://soundamerican.org/migrate/person
   item_selector: 0
   fields:
-    -
-      name: src_nid
+    - name: src_nid
       selector: /nid/0/value
-    -
-      name: src_title
+    - name: src_title
       selector: /title/0/value
-    -
-      name: src_family
+    - name: src_family
       selector: /field_person_name/0/family
-    -
-      name: src_middle
+    - name: src_middle
       selector: /field_person_name/0/middle
-    -
-      name: src_given
+    - name: src_given
       selector: /field_person_name/0/given
   ids:
     src_nid:
@@ -41,9 +36,9 @@ process:
     plugin: default_value
     default_value: 2
   title: src_title
-  field_person_name/given: src_given
-  field_person_name/family: src_family
-  field_person_name/middle: src_middle
+  field_name/given: src_given
+  field_name/family: src_family
+  field_name/middle: src_middle
 
 # Destination plugin
 destination:

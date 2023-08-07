@@ -2,40 +2,38 @@
 id: sa_files
 label: sa_files
 description: Migration from CSV to managed files
-migration_group: "sa media"
+migration_group: "csv"
 
 source:
   track_changes: true
   plugin: csv
-  path: 'public://migrations/sa-files.csv'
-  delimiter: ','
+  path: "/app/web/sites/default/files/migrations/sa_migrate_files.csv"
+  delimiter: ","
   enclosure: '"'
-  ids: [sa_mid]
+  ids: [fid]
 
   constants:
-    SOURCE: "https://gaburo.s3.amazonaws.com/dram/public/sa-file-staging"
-    DESTINATION: "public:/"
+    SOURCE: "https://soundamerican.org"
+    DESTINATION: "public://migration-temp"
 
 # Process plugin
 process:
   uid:
     plugin: default_value
     default_value: 2
-  fid: sa_mid
+  fid: fid
   filemime: mimetype
 
   pseudo_source_path:
     plugin: concat
     source:
       - constants/SOURCE
-      - filename
-    delimiter: /
+      - path
 
   pseudo_destination_path:
     plugin: concat
     source:
       - constants/DESTINATION
-      - type
       - filename
     delimiter: /
 

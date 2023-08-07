@@ -1,0 +1,42 @@
+# Migration metadata
+id: sa_paragraph_chapter_title
+label: sa_paragraph_chapter_title
+description: Migration from JSON to Drupal paragraph entities
+migration_group: "remote json"
+
+source:
+  track_changes: true
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - https://soundamerican.org/migrate/chapter-titles
+  item_selector: 0
+  fields:
+    - name: src_id
+      selector: /id/0/value
+    - name: src_type
+      selector: /type/0/target_id
+    - name: src_title
+      selector: /field_title/0/value
+  ids:
+    src_id:
+      type: integer
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: chapter_title
+  uid:
+    plugin: default_value
+    default_value: 2
+  field_body/value: src_title
+  field_body/format:
+    plugin: default_value
+    default_value: "formatted_title"
+
+destination:
+  plugin: "entity_reference_revisions:paragraph"
+
+migration_dependencies: {}

@@ -14,11 +14,9 @@ source:
     - https://soundamerican.org/migrate/types
   item_selector: 0
   fields:
-    -
-      name: src_tid
+    - name: src_tid
       selector: /tid/0/value
-    -
-      name: src_name
+    - name: src_name
       selector: /name/0/value
   ids:
     src_tid:

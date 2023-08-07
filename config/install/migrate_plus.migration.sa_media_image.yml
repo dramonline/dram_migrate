@@ -1,0 +1,53 @@
+# Migration metadata
+id: sa_media_image
+label: sa_media_image
+description: Migration from JSON to media entities
+migration_group: "sa media"
+
+source:
+  track_changes: true
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - https://soundamerican.org/migrate/media-image
+  item_selector: 0
+  fields:
+    - name: src_name
+      selector: /name/0/value
+    - name: src_mid
+      selector: /mid/0/value
+    - name: src_fid
+      selector: /field_media_image/0/target_id
+    - name: src_caption
+      selector: /field_media_image_caption/0/value
+    - name: src_alt
+      selector: /field_media_image/0/alt
+
+  ids:
+    src_mid:
+      type: integer
+
+# Process plugin
+process:
+  uid:
+    plugin: default_value
+    default_value: 2
+  mid: mid
+  name: src_name
+  field_media_image/target_id:
+    plugin: migration_lookup
+    migration: sa_files
+    source: src_fid
+  field_media_image/alt: src_name
+  field_caption/value: src_caption
+  field_caption/format:
+    plugin: default_value
+    default_value: "caption"
+
+destination:
+  plugin: entity:media
+  default_bundle: image
+  move: false
+
+migration_dependencies: {}

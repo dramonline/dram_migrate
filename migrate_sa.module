@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Contains migrate_sa.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function migrate_sa_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.migrate_sa':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Migration from JSON objects to Drupal core entities') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function migrate_sa() {
+  return [
+    'migrate_sa' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Removes stale migration configs during uninstall.
+ */
+function migrate_sa_uninstall() {
+  $migrations = [
+    'sa_article',
+    'sa_article_live',
+    'sa_article_legacy',
+    'sa_article_media',
+    'sa_issue',
+    'sa_media_file',
+    'sa_media_image',
+    'sa_media_portrait',
+    'sa_media_soundcloud',
+    'sa_media_video',
+    'sa_paragraph_endnote',
+    'sa_paragraph_interview',
+    'sa_paragraph_media',
+    'sa_paragraph_page_section',
+    'sa_paragraph_chapter_title',
+    'sa_paragraph_listening',
+    'sa_person',
+    'sa_type',
+    'sa_files',
+  ];
+  foreach ($migrations as $migration) {
+    Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
+  }
+}
