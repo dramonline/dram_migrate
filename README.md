@@ -1,7 +1,7 @@
 # migrate_dram
-Custom Drupal migrations from SQL database to Drupal entities.
+Custom Drupal migrations from MySQL database and JSON sources to Drupal entities.
 
-## Major DRAM data types
+## DRAM data types
 * album
 * artist
 * function
@@ -28,6 +28,6 @@ drupal config:delete active migrate_plus.migration.instrument
 ...
 </pre>
 
-## Adding an uninstall script to custom migrate modules
+## Instructions for adding an uninstall script to custom `migrate` modules
 
 https://gist.github.com/jasloe/9293b50bad43b8d9605b30404df34e44
